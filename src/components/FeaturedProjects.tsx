@@ -129,60 +129,45 @@ export default function FeaturedProjects() {
       id: "my-home",
       title: "My Home",
       url: "https://www.myhome-co.com/",
-      description: "Corporate real estate web portal with custom WordPress development, ultra-responsive property search flows, and highly performant custom layout structures.",
+      description: "Custom premium WordPress theme development featuring ultra-responsive regional property search flows, speed optimizations, and ACF Pro architecture.",
       role: "Lead CMS Architect & Frontend Specialist",
       year: "2024",
       category: "REAL ESTATE PORTAL",
-      tags: ["WordPress", "Frontend Development", "Responsive Design", "CMS"],
-      achievements: [
-        "Crafted a completely custom theme from scratch, eliminating bloat to achieve sub-1.4s load times.",
-        "Built dynamic property sorting and custom tax filters with WP REST API integration.",
-        "Created custom ACF Pro fields allowing site admins to control detailed regional real estate blocks."
-      ],
+      tags: ["WordPress", "Frontend Dev", "ACF Pro", "CMS Architecture"],
+      achievements: [],
       stats: [
         { label: "LCP", value: "1.1s" },
-        { label: "Speed Index", value: "1.3s" },
-        { label: "Mobile Score", value: "97%" }
+        { label: "Speed Index", value: "1.3s" }
       ]
     },
     {
       id: "aidec-plus",
       title: "Aidec Plus",
       url: "https://aidecplus.com/",
-      description: "Modern high-end furniture design and manufacturing corporate portal. Heavy emphasis on visual storytelling, custom layouts, and highly interactive inventory portfolios.",
+      description: "Sleek, high-end furniture design portal using custom block patterns, lazy-loaded aesthetic product showcases, and high-DPI graphics tuning.",
       role: "Senior Themes Engineer",
       year: "2023",
-      category: "DESIGN & MANUFACTURING PLATFORM",
-      tags: ["WordPress", "Custom Themes", "ACF Pro", "Interactive UI"],
-      achievements: [
-        "Designed and engineered custom Gutenberg blocks with React wrappers for complex grid layouts.",
-        "Optimized massive visual product galleries with lazy-loading systems and WebP conversion routes.",
-        "Coded pixel-perfect responsive templates mirroring sleek architectural print aesthetics."
-      ],
+      category: "DESIGN & MFG PORTAL",
+      tags: ["WordPress", "Custom Block Themes", "Responsive UI", "CSS/SCSS"],
+      achievements: [],
       stats: [
         { label: "LCP", value: "1.2s" },
-        { label: "CLS", value: "0.01" },
-        { label: "Desktop Score", value: "99%" }
+        { label: "CLS", value: "0.01" }
       ]
     },
     {
       id: "ptruck",
       title: "PTRUCK",
       url: "https://www.ptruck.co.jp/",
-      description: "Corporate Japanese vehicle solutions database emphasis on massive CMS schema optimization, lightning fast query lists, and fully responsive typography scales.",
+      description: "Relational vehicle fleet database portal with highly optimized custom query filters under the WordPress hood and mobile-first typography scales.",
       role: "Core Technical Frontend Lead",
       year: "2023",
-      category: "ENTERPRISE FLEET CMS",
-      tags: ["WordPress", "PHP/SQL Setup", "Performance Tuning", "Corporate UX"],
-      achievements: [
-        "Maintained and refactored a massive relational schema allowing quick truck specs queries under the WP hood.",
-        "Designed a complete mobile-first layout with fluid typographic scales mapping perfectly from mobile up to widescreen desktop.",
-        "Custom Japanese SEO configuration with metadata engines achieving continuous Google search visibility."
-      ],
+      category: "ENTERPRISE CORP CMS",
+      tags: ["WordPress", "Relational CMS", "Speed Tuning", "SCSS"],
+      achievements: [],
       stats: [
         { label: "FCP", value: "0.9s" },
-        { label: "FID", value: "11ms" },
-        { label: "Mobile Score", value: "95%" }
+        { label: "Performance", value: "95%" }
       ]
     }
   ];
@@ -309,25 +294,8 @@ export default function FeaturedProjects() {
                     {proj.description}
                   </p>
 
-                  {/* Highlights checklist */}
-                  <div className="space-y-3.5 border-t border-white/10 pt-6">
-                    <span className="text-[9px] font-mono text-zinc-600 block uppercase tracking-widest">
-                      CORE_CONTRIBUTION_ANALYSIS
-                    </span>
-                    {proj.achievements.map((ach, aidx) => (
-                      <div key={aidx} className="flex gap-3 items-start">
-                        <span className="w-5 h-5 rounded-none bg-white/5 border border-white/15 flex items-center justify-center flex-shrink-0 mt-0.5">
-                          <Check className="w-3 h-3 text-white" />
-                        </span>
-                        <span className="text-xs text-zinc-400 font-sans leading-relaxed">
-                          {ach}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-
                   {/* Tags */}
-                  <div className="flex flex-wrap gap-2 pt-4">
+                  <div className="flex flex-wrap gap-2 pt-6 border-t border-white/10">
                     {proj.tags.map((tag, tidx) => (
                       <span 
                         key={tidx}

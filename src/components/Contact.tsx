@@ -86,29 +86,17 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
           
           {/* Left Column: About Me Positioning (Cols 1 to 6) */}
-          <div className="lg:col-span-6 space-y-8">
+          <div className="lg:col-span-6 space-y-6">
             <div className="space-y-4">
               <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest block font-bold">
-                ABOUT // EXPERIENCE_POSITIONING
+                ABOUT // FOCUS
               </span>
               <h3 className="text-xl md:text-2xl font-serif italic font-light text-white leading-snug">
-                Architectural frontend developer, shaping responsive WordPress solutions & CMS databases.
+                Engineering high-performance custom WordPress themes, fluid layouts, and detailed responsive interfaces.
               </h3>
               <p className="text-xs text-zinc-400 font-sans leading-relaxed">
-                I focus on delivering custom visual architectures with pristine layouts, pixel-perfect margins, fast-loading rendering weights, and modern interaction physics.
+                I direct my professional focus on pristine typography pairing, layouts using balanced negative space, responsive structures, fast-loading bundle weights, and clean semantic structures.
               </p>
-            </div>
-
-            {/* Structured Capabilities Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-3 pt-2">
-              {coreSkills.map((skill, index) => (
-                <div key={index} className="flex gap-2.5 items-center group">
-                  <span className="w-1.5 h-1.5 bg-white scale-75 group-hover:scale-100 transition-transform duration-300 flex-shrink-0" />
-                  <span className="text-[11px] font-mono text-zinc-400 group-hover:text-white transition-colors duration-300 uppercase tracking-wider">
-                    {skill}
-                  </span>
-                </div>
-              ))}
             </div>
           </div>
 

@@ -108,7 +108,7 @@ export default function Hero({ onViewProjects, onContactMe }: HeroProps) {
             className="grid grid-cols-3 gap-6 pt-10 border-t border-white/10 max-w-md"
           >
             <div>
-              <span className="font-serif italic font-light text-3xl text-white block">08+</span>
+              <span className="font-serif italic font-light text-3xl text-white block">03+</span>
               <span className="font-mono text-[9px] text-zinc-500 uppercase tracking-widest">Years Exp</span>
             </div>
             <div>
