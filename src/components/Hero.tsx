@@ -55,12 +55,12 @@ export default function Hero({ onViewProjects, onContactMe }: HeroProps) {
 
           {/* Heading */}
           <div className="space-y-2">
-            <motion.h2 
+            <motion.p 
               variants={itemVars}
               className="text-[10px] font-mono text-zinc-500 tracking-[0.25em] uppercase block"
             >
               // FRONTEND DEVELOPER
-            </motion.h2>
+            </motion.p>
             <motion.h1 
               variants={itemVars}
               className="text-4xl md:text-6xl xl:text-7xl font-sans font-light tracking-tight text-white leading-[1.05] uppercase"
