@@ -118,11 +118,71 @@ function ProjectVisualMockup({ id }: { id: string }) {
       </div>
     );
   }
+  if (id === "block-forge") {
+    return (
+      <div className="absolute inset-0 flex flex-col justify-between p-4 bg-gradient-to-br from-[#0c0c0c] to-[#050512] text-white select-none">
+        {/* Schema Engine Header */}
+        <div className="flex items-center justify-between text-[8px] font-mono text-zinc-500 border-b border-white/5 pb-2">
+          <span>BLOCKFORGE // CORE_ENGINE</span>
+          <span>COMPILING_STREAMS</span>
+        </div>
+        {/* Schema Matrix GUI */}
+        <div className="flex-1 flex gap-3 items-center justify-center">
+          <div className="space-y-1 text-left">
+            <span className="text-[12px] font-serif text-white italic block leading-none">nest schemas.</span>
+            <span className="text-[6px] font-mono text-zinc-500 block">DRAG-N-DROP BLOCKS MATRIX</span>
+          </div>
+          <div className="flex flex-col gap-1 w-[100px] border border-white/10 bg-black/60 p-1">
+            <div className="border border-white/5 bg-zinc-950 p-1 text-[5px] font-mono flex items-center justify-between">
+              <span className="text-zinc-400">#hero-container</span>
+              <span className="text-[4px] bg-white/10 px-1 py-0.5 rounded-none text-zinc-400">GRID</span>
+            </div>
+            <div className="border border-emerald-500/20 bg-emerald-950/10 p-1 text-[5px] font-mono flex items-center justify-between">
+              <span className="text-emerald-400">#feature-cards</span>
+              <span className="text-[4px] bg-emerald-500/25 px-1 py-0.5 text-emerald-400">FLEX</span>
+            </div>
+            <div className="border border-white/5 bg-zinc-950 p-1 text-[5px] font-mono flex items-center justify-between">
+              <span className="text-zinc-650">+ append node</span>
+              <span className="text-[4px] text-zinc-650">APPEND</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (id === "magnet-physics") {
+    return (
+      <div className="absolute inset-0 flex flex-col justify-between p-4 bg-gradient-to-tr from-[#080808] to-[#12080a] text-white select-none">
+        {/* Magnetic Interactions Header */}
+        <div className="flex items-center justify-between text-[8px] font-mono text-zinc-500 border-b border-white/5 pb-2">
+          <span>ACTIVE_MAGNET // POINTER_PHYSICS</span>
+          <span>SIMULATE_STABLE</span>
+        </div>
+        {/* Vector coordinates */}
+        <div className="flex-1 flex gap-4 items-center justify-center">
+          <div className="space-y-1 text-left flex-1">
+            <span className="text-[11px] font-sans text-rose-300 block leading-tight">magnetic grids.</span>
+            <span className="text-[5px] font-mono text-zinc-500 block">DENSITY COEFFICIENT: 0.82v</span>
+          </div>
+          {/* Visual dynamic node radar */}
+          <div className="w-[70px] h-[70px] rounded-full border border-white/10 relative flex items-center justify-center">
+            <div className="absolute w-[45px] h-[45px] rounded-full border border-dashed border-white/5" />
+            <div className="absolute w-1.5 h-1.5 bg-rose-500 rounded-full animate-ping" />
+            <div className="absolute w-1 h-1 bg-white rounded-full" />
+            {/* Coordinate line indicators */}
+            <div className="absolute inset-0 h-[1px] w-full bg-white/5 top-1/2" />
+            <div className="absolute inset-0 w-[1px] h-full bg-white/5 left-1/2" />
+          </div>
+        </div>
+      </div>
+    );
+  }
   return null;
 }
 
 export default function FeaturedProjects() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const [activeTab, setActiveTab] = useState<"commercial" | "personal">("commercial");
 
   const projects: Project[] = [
     {
@@ -172,6 +232,41 @@ export default function FeaturedProjects() {
     }
   ];
 
+  const personalProjects: Project[] = [
+    {
+      id: "block-forge",
+      title: "BlockForge CMS",
+      url: "https://github.com/keepcalm0023/blockforge",
+      description: "A lightweight visual schema builder modeling ACF and Gutenberg block nests. Exporting high-performance custom JSON configurations natively.",
+      role: "Creator & Developer",
+      year: "2024",
+      category: "LABORATORY GRAPHICS",
+      tags: ["TypeScript", "Canvas Engine", "JSON Schema", "Tailwind"],
+      achievements: [],
+      stats: [
+        { label: "Weight", value: "14kb" },
+        { label: "Rendering", value: "60fps" }
+      ]
+    },
+    {
+      id: "magnet-physics",
+      title: "Active Physics",
+      url: "https://github.com/keepcalm0023/active-physics",
+      description: "An experimental interactive canvas exploring magnetic proximity equations and custom dynamic spring constants for high-fidelity portfolio menus.",
+      role: "Creator & Developer",
+      year: "2023",
+      category: "DYNAMICS MODULE",
+      tags: ["TypeScript", "Tailwind", "Pointer Vectors", "Math Engine"],
+      achievements: [],
+      stats: [
+        { label: "Load Time", value: "0.2s" },
+        { label: "Accuracy", value: "99.9%" }
+      ]
+    }
+  ];
+
+  const activeProjects = activeTab === "commercial" ? projects : personalProjects;
+
   return (
     <section 
       id="projects" 
@@ -190,17 +285,49 @@ export default function FeaturedProjects() {
               // RECENT_ACCOMPLISHMENTS
             </span>
             <h2 className="text-3xl md:text-5xl font-sans font-light tracking-tight text-white uppercase">
-              Featured <span className="font-serif italic font-normal text-zinc-300">Case Studies.</span>
+              Featured <span className="font-serif italic font-normal text-zinc-300">Works.</span>
             </h2>
           </div>
           <p className="max-w-md text-xs text-zinc-500 font-sans leading-relaxed">
-            Real-world CMS platforms and complex frontend systems engineered with high performance, secure structures, and fluid responsive styling.
+            Real-world CMS platforms and specialized internal application architectures engineered to combine design aesthetics with fast execution times.
           </p>
+        </div>
+
+        {/* Tab Selection Filter */}
+        <div className="flex gap-6 border-b border-white/5 pb-2 pt-2">
+          <button 
+            onClick={() => {
+              setActiveTab("commercial");
+              setHoveredIdx(null);
+            }}
+            data-cursor="pointer"
+            className={`font-mono text-[10px] tracking-widest pb-3 border-b-2 uppercase transition-all duration-300 cursor-pointer ${
+              activeTab === "commercial" 
+                ? "border-white text-white font-semibold" 
+                : "border-transparent text-zinc-500 hover:text-zinc-350"
+            }`}
+          >
+            [01] Commercial Client Suites
+          </button>
+          <button 
+            onClick={() => {
+              setActiveTab("personal");
+              setHoveredIdx(null);
+            }}
+            data-cursor="pointer"
+            className={`font-mono text-[10px] tracking-widest pb-3 border-b-2 uppercase transition-all duration-300 cursor-pointer ${
+              activeTab === "personal" 
+                ? "border-white text-white font-semibold" 
+                : "border-transparent text-zinc-500 hover:text-zinc-350"
+            }`}
+          >
+            [02] Personal Laboratories
+          </button>
         </div>
 
         {/* Projects list */}
         <div className="space-y-24">
-          {projects.map((proj, idx) => {
+          {activeProjects.map((proj, idx) => {
             return (
               <div 
                 key={proj.id}
