@@ -10,10 +10,10 @@ function ProjectVisualMockup({ id }: { id: string }) {
   let altText = "";
 
   if (id === "my-home") {
-    imgSrc = "../src/assets/images/myhome.png";
+    imgSrc = "../assets/images/block_forge_preview_1781156128930.png";
     altText = "My Home Custom WordPress Theme Placeholder";
   } else if (id === "aidec-plus") {
-    imgSrc = "../src/assets/images/aidec.png";
+    imgSrc = "../assets/images/aidec.png";
     altText = "Aidec Plus Curated Furniture Placeholder";
   } else if (id === "ptruck") {
     imgSrc = "../src/assets/images/ptruck.png";
