@@ -9,7 +9,7 @@ export default function Experience() {
     {
       company: "Upward Next Inc.",
       role: "Front End Engineer",
-      period: "March 2022 - October 2025",
+      period: "March 2022 - PRESENT",
       location: "Remote",
       highlight: "Led engineering teams and shaped custom, high-speed corporate, and Welcart e-commerce WordPress architectures.",
       details: [

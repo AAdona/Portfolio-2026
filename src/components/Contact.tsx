@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Mail, Linkedin, ArrowUpRight, Check, Download, Send, CheckCircle2 } from "lucide-react";
+import { useForm, ValidationError } from '@formspree/react';
 
 export default function Contact() {
-  const [downloadState, setDownloadState] = useState<"idle" | "preparing" | "ready">("idle");
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [state, handleSubmit] = useForm("mpqebzzd");
+  const [downloadState, setDownloadState] = React.useState<"idle" | "preparing" | "ready">("idle");
 
   const coreSkills = [
     "Frontend Development",
@@ -27,11 +26,10 @@ export default function Contact() {
     setTimeout(() => {
       setDownloadState("ready");
       
-      // Dynamic download action for Adrian's tailored creative resume
       const element = document.createElement("a");
       const file = new Blob([
         `ADRIAN HERO ADONA - FRONTEND DEVELOPER RESUME\n\n` +
-        `Portfolio: https://ais-pre-je4mpvquhy3ao4qpeyjnal-958613295827.asia-southeast1.run.app\n` +
+        `Portfolio: https://www.adrianadona.lol\n` +
         `Email: keepcalm0023@gmail.com\n\n` +
         `POSITIONING & STATEMENT:\n` +
         `Building modern, high-performance websites with WordPress, custom CMS solutions, and engaging web interactions.\n\n` +
@@ -51,28 +49,10 @@ export default function Contact() {
       element.click();
       document.body.removeChild(element);
 
-      // Reset state after a few seconds
       setTimeout(() => {
         setDownloadState("idle");
       }, 3000);
     }, 1500);
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) return;
-    setIsSubmitting(true);
-    
-    // Simulate API delivery sequence
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitSuccess(true);
-      setFormData({ name: "", email: "", message: "" });
-      
-      setTimeout(() => {
-        setSubmitSuccess(false);
-      }, 4000);
-    }, 1200);
   };
 
   return (
@@ -105,7 +85,7 @@ export default function Contact() {
         {/* Primary Contact Area Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
           
-          {/* Left Column: Direct channels and blurb (Cols 1 to 5) */}
+          {/* Left Column */}
           <div className="lg:col-span-5 space-y-8">
             <div className="space-y-4">
               <span className="text-xs md:text-sm font-sans text-zinc-400 uppercase tracking-wider block font-semibold">
@@ -125,7 +105,6 @@ export default function Contact() {
               </span>
 
               <div className="space-y-3.5 pt-2">
-                {/* Direct email link block */}
                 <a 
                   href="mailto:keepcalm0023@gmail.com" 
                   data-cursor="email_me"
@@ -147,9 +126,8 @@ export default function Contact() {
                   <ArrowUpRight className="w-5 h-5 text-zinc-500 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition" />
                 </a>
 
-                {/* LinkedIn action block */}
                 <a 
-                  href="https://linkedin.com" 
+                  href="https://linkedin.com/in/adrianadona" 
                   target="_blank" 
                   rel="noreferrer"
                   data-cursor="linkedin"
@@ -171,7 +149,6 @@ export default function Contact() {
                   <ArrowUpRight className="w-5 h-5 text-zinc-500 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition" />
                 </a>
 
-                {/* Advanced Interactive Resume Download Action Button */}
                 <button 
                   onClick={handleDownload}
                   data-cursor="pointer"
@@ -212,7 +189,7 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Right Column: Custom Modern Messaging Form (Cols 6 to 12) */}
+          {/* Right Column: Form */}
           <div className="lg:col-span-7 p-8 md:p-10 bg-[#0c0c0c] border border-white/10 rounded-none space-y-6 relative">
             <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
             
@@ -226,7 +203,7 @@ export default function Contact() {
             </div>
 
             <AnimatePresence mode="wait">
-              {submitSuccess ? (
+              {state.succeeded ? (
                 <motion.div 
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -249,7 +226,7 @@ export default function Contact() {
                   </span>
                 </motion.div>
               ) : (
-                <motion.form 
+                <motion.form
                   onSubmit={handleSubmit}
                   initial={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
@@ -261,13 +238,13 @@ export default function Contact() {
                       Your Name *
                     </label>
                     <input 
-                      type="text" 
+                      type="text"
+                      name="name"
                       required
-                      placeholder="e.g. Alexis Carter"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      placeholder="e.g. Juan Dela Cruz"
                       className="w-full px-4 py-3.5 bg-black/50 border border-white/10 text-white placeholder-zinc-650 rounded-none focus:outline-none focus:border-white/40 focus:ring-0 text-sm transition duration-300 font-sans"
                     />
+                    <ValidationError prefix="Name" field="name" errors={state.errors} className="text-red-400 text-xs font-sans" />
                   </div>
 
                   {/* Email field */}
@@ -276,13 +253,13 @@ export default function Contact() {
                       Your Email Address *
                     </label>
                     <input 
-                      type="email" 
+                      type="email"
+                      name="email"
                       required
-                      placeholder="e.g. alexis@company.com"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      placeholder="e.g. email@domain.com"
                       className="w-full px-4 py-3.5 bg-black/50 border border-white/10 text-white placeholder-zinc-655 rounded-none focus:outline-none focus:border-white/40 focus:ring-0 text-sm transition duration-300 font-sans"
                     />
+                    <ValidationError prefix="Email" field="email" errors={state.errors} className="text-red-400 text-xs font-sans" />
                   </div>
 
                   {/* Message field */}
@@ -291,22 +268,22 @@ export default function Contact() {
                       Your Message *
                     </label>
                     <textarea 
+                      name="message"
                       required
                       rows={5}
                       placeholder="How can I help you?"
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       className="w-full px-4 py-4.5 bg-black/50 border border-white/10 text-white placeholder-zinc-660 rounded-none focus:outline-none focus:border-white/40 focus:ring-0 text-sm transition duration-300 font-sans resize-none leading-relaxed"
                     />
+                    <ValidationError prefix="Message" field="message" errors={state.errors} className="text-red-400 text-xs font-sans" />
                   </div>
 
                   {/* Submit Button */}
                   <button
                     type="submit"
-                    disabled={isSubmitting}
+                    disabled={state.submitting}
                     className="w-full py-4.5 bg-white text-black hover:bg-white/90 disabled:bg-zinc-800 disabled:text-zinc-500 font-sans font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2.5 transition duration-300 cursor-pointer rounded-none shadow-xl"
                   >
-                    {isSubmitting ? (
+                    {state.submitting ? (
                       <>
                         <span className="w-4 h-4 border-2 border-zinc-400 border-t-black rounded-full animate-spin" />
                         Sending...
@@ -321,7 +298,6 @@ export default function Contact() {
               )}
             </AnimatePresence>
 
-            {/* Minimal Security disclaimer */}
             <div className="flex items-center justify-between border-t border-white/5 pt-4 text-[10px] font-sans text-zinc-500">
               <span>Adrian Hero Adona</span>
               <span>Portfolio 2026</span>
@@ -329,7 +305,6 @@ export default function Contact() {
           </div>
 
         </div>
-
       </div>
     </section>
   );
