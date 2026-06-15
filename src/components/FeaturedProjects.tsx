@@ -3,31 +3,24 @@ import { motion } from "motion/react";
 import { ArrowUpRight, Check, ExternalLink, Globe, HardDrive, LayoutGrid, Briefcase, Beaker } from "lucide-react";
 import { Project } from "../types";
 
-// Imported images using standard bundler syntax
-import myHomeImg from "../assets/images/myhome.png";
-import aidecImg from "../assets/images/aidec.png";
-import ptruckImg from "../assets/images/ptruck.png";
-import blockForgeImg from "../assets/images/block_forge_preview_1781156128930.png";
-import magnetPhysicsImg from "../assets/images/magnet_physics_preview_1781156143960.png";
-
 function ProjectVisualMockup({ id }: { id: string }) {
   let imgSrc = "";
   let altText = "";
 
   if (id === "my-home") {
-    imgSrc = myHomeImg;
+    imgSrc = "/images/myhome.png";
     altText = "My Home Custom WordPress Theme Placeholder";
   } else if (id === "aidec-plus") {
-    imgSrc = aidecImg;
+    imgSrc = "/images/aidec.png";
     altText = "Aidec Plus Curated Furniture Placeholder";
   } else if (id === "ptruck") {
-    imgSrc = ptruckImg;
+    imgSrc = "/images/ptruck.png";
     altText = "PTRUCK Relational Fleet CMS Placeholder";
   } else if (id === "block-forge") {
-    imgSrc = blockForgeImg;
+    imgSrc = "/images/block_forge_preview_1781156128930.png";
     altText = "BlockForge Visual Schema Builder Preview";
   } else if (id === "magnet-physics") {
-    imgSrc = magnetPhysicsImg;
+    imgSrc = "/images/magnet_physics_preview_1781156143960.png";
     altText = "Active Physics Dynamic Fluid Interactions Preview";
   }
 

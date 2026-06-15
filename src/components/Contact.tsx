@@ -15,7 +15,7 @@ export default function Contact() {
       setDownloadState("ready");
       
       const element = document.createElement("a");
-      element.href = "../src/assets/CV-ADONA.pdf";
+      element.href = "./public/CV-ADONA.pdf";
       element.download = "CV-ADONA.pdf";
       document.body.appendChild(element);
       element.click();
