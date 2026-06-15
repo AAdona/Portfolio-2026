@@ -141,7 +141,7 @@ export default function FeaturedProjects() {
               Recent Case Studies
             </span>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-sans font-light tracking-tight text-white uppercase">
-              Featured <span className="font-serif italic font-normal text-zinc-300">Works.</span>
+              Featured <span className="font-serif italic font-normal text-zinc-300">Projects.</span>
             </h2>
           </div>
           <p className="max-w-lg text-sm md:text-base text-zinc-400 font-sans leading-relaxed">
@@ -171,14 +171,7 @@ export default function FeaturedProjects() {
               )}
               <span className="relative z-10 flex items-center gap-2">
                 <Briefcase className="w-4 h-4" />
-                [01] Commercial Suites
-              </span>
-              <span className={`relative z-10 text-xs px-2.5 py-0.5 rounded-sm font-sans font-extrabold ${
-                activeTab === "commercial" 
-                  ? "bg-black/10 text-black/85" 
-                  : "bg-white/5 text-zinc-400"
-              }`}>
-                3
+                [01] Work
               </span>
             </button>
             <button
@@ -200,14 +193,7 @@ export default function FeaturedProjects() {
               )}
               <span className="relative z-10 flex items-center gap-2">
                 <Beaker className="w-4 h-4" />
-                [02] Personal Labs
-              </span>
-              <span className={`relative z-10 text-xs px-2.5 py-0.5 rounded-sm font-sans font-extrabold ${
-                activeTab === "personal" 
-                  ? "bg-black/10 text-black/85" 
-                  : "bg-white/5 text-zinc-400"
-              }`}>
-                2
+                [02] Personal
               </span>
             </button>
           </div>

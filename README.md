@@ -1,20 +1,15 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Adrian Hero T. Adona - Portfolio
 
-# Run and deploy your AI Studio app
+This repository contains the source code for my personal portfolio website. It showcases my work as a Full Stack CMS & Frontend Developer, highlighting projects built with React, WordPress, and custom schema architectures.
 
-This contains everything you need to run your app locally.
-
-View your app in AI Studio: https://ai.studio/apps/2842c106-76bd-4f28-92a4-370aa670fddf
+View the live portfolio: https://www.adrianadona.lol/
 
 ## Run Locally
 
-**Prerequisites:**  Node.js
-
+**Prerequisites:** Node.js
 
 1. Install dependencies:
    `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+2. Set your `API_KEY` in [.env.local](.env.local) to your API key (if applicable)
 3. Run the app:
    `npm run dev`
