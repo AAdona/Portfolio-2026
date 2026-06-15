@@ -101,25 +101,6 @@ export default function Hero({ onViewProjects, onContactMe }: HeroProps) {
               Contact Me
             </button>
           </motion.div>
-
-          {/* Metric list */}
-          <motion.div 
-            variants={itemVars}
-            className="grid grid-cols-3 gap-6 pt-10 border-t border-white/10 max-w-md"
-          >
-            <div>
-              <span className="font-serif italic font-light text-3xl text-white block">03+</span>
-              <span className="font-mono text-[9px] text-zinc-500 uppercase tracking-widest">Years Exp</span>
-            </div>
-            <div>
-              <span className="font-serif italic font-light text-3xl text-white block">100%</span>
-              <span className="font-mono text-[9px] text-zinc-500 uppercase tracking-widest">Custom Code</span>
-            </div>
-            <div>
-              <span className="font-serif italic font-light text-3xl text-white block">98+</span>
-              <span className="font-mono text-[9px] text-zinc-500 uppercase tracking-widest">Lighthouse</span>
-            </div>
-          </motion.div>
         </div>
 
         {/* Right column: Interactive Visual Showcase */}
