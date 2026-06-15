@@ -1,15 +1,26 @@
-# Adrian Hero T. Adona - Portfolio
+# Adrian Hero Adona
 
-This repository contains the source code for my personal portfolio website. It showcases my work as a Full Stack CMS & Frontend Developer, highlighting projects built with React, WordPress, and custom schema architectures.
+Personal portfolio website showcasing my projects, skills, and experience as a Frontend Developer.
 
-View the live portfolio: https://www.adrianadona.lol/
+🌐 Live Site: https://www.adrianadona.lol/
 
-## Run Locally
+## About
 
-**Prerequisites:** Node.js
+This repository contains the source code for my personal portfolio website. It highlights selected projects, technical expertise, and professional experience in building modern, responsive, and user-focused web applications.
 
-1. Install dependencies:
-   `npm install`
-2. Set your `API_KEY` in [.env.local](.env.local) to your API key (if applicable)
-3. Run the app:
-   `npm run dev`
+## Tech Stack
+
+- React
+- Tailwind CSS
+- JavaScript
+- Vite
+
+### Prerequisites
+
+- Node.js
+- npm
+
+### Installation
+
+```bash
+npm install
