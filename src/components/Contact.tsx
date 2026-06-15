@@ -7,44 +7,16 @@ export default function Contact() {
   const [state, handleSubmit] = useForm("mpqebzzd");
   const [downloadState, setDownloadState] = React.useState<"idle" | "preparing" | "ready">("idle");
 
-  const coreSkills = [
-    "Frontend Development",
-    "WordPress Development",
-    "Custom CMS Solutions",
-    "JavaScript",
-    "TypeScript",
-    "CSS / SCSS",
-    "GSAP Animations",
-    "Responsive Web Development",
-    "Performance Optimization",
-    "UI Implementation"
-  ];
-
   const handleDownload = () => {
     if (downloadState !== "idle") return;
     setDownloadState("preparing");
+    
     setTimeout(() => {
       setDownloadState("ready");
       
       const element = document.createElement("a");
-      const file = new Blob([
-        `ADRIAN HERO ADONA - FRONTEND DEVELOPER RESUME\n\n` +
-        `Portfolio: https://www.adrianadona.lol\n` +
-        `Email: keepcalm0023@gmail.com\n\n` +
-        `POSITIONING & STATEMENT:\n` +
-        `Building modern, high-performance websites with WordPress, custom CMS solutions, and engaging web interactions.\n\n` +
-        `CORE EXPERIENCE & EXPERTISE:\n` +
-        coreSkills.map(s => `- ${s}`).join("\n") +
-        `\n\nFEATURED RECENT CASE STUDIES:\n` +
-        `- My Home (https://www.myhome-co.com/)\n` +
-        `  Role: Lead CMS Architect & Frontend Specialist (2024)\n` +
-        `- Aidec Plus (https://aidecplus.com/)\n` +
-        `  Role: Senior Themes Engineer (2023)\n` +
-        `- PTRUCK (https://www.ptruck.co.jp/)\n` +
-        `  Role: Core Technical Frontend Lead (2023)`
-      ], { type: 'text/plain' });
-      element.href = URL.createObjectURL(file);
-      element.download = "Adrian_Hero_Adona_Resume.txt";
+      element.href = "../src/assets/CV-ADONA.pdf";
+      element.download = "CV-ADONA.pdf";
       document.body.appendChild(element);
       element.click();
       document.body.removeChild(element);
@@ -106,7 +78,7 @@ export default function Contact() {
 
               <div className="space-y-3.5 pt-2">
                 <a 
-                  href="mailto:keepcalm0023@gmail.com" 
+                  href="mailto:adrianheroadona@gmail.com" 
                   data-cursor="email_me"
                   className="group flex items-center justify-between p-5 bg-[#0c0c0c] border border-white/10 hover:border-white/30 rounded-none transition duration-300"
                 >
@@ -119,7 +91,7 @@ export default function Contact() {
                         Direct Email
                       </span>
                       <span className="text-sm md:text-base font-sans text-white hover:text-zinc-300 transition block mt-1.5 font-medium">
-                        keepcalm0023@gmail.com
+                        adrianheroadona@gmail.com
                       </span>
                     </div>
                   </div>
@@ -127,7 +99,7 @@ export default function Contact() {
                 </a>
 
                 <a 
-                  href="https://linkedin.com/in/adrianadona" 
+                  href="https://linkedin.com/in/ahadona" 
                   target="_blank" 
                   rel="noreferrer"
                   data-cursor="linkedin"
@@ -176,8 +148,8 @@ export default function Contact() {
                       </span>
                       <span className="text-sm md:text-base font-sans block mt-1.5 text-zinc-200">
                         {downloadState === "idle" && "Download Resume"}
-                        {downloadState === "preparing" && "Assembling resume details..."}
-                        {downloadState === "ready" && "Adrian_Hero_Adona_Resume.txt downloaded!"}
+                        {downloadState === "preparing" && "Retrieving file..."}
+                        {downloadState === "ready" && "CV-ADONA.pdf downloaded!"}
                       </span>
                     </div>
                   </div>

@@ -8,12 +8,16 @@ export default function Experience() {
   const careerHistory = [
     {
       company: "Upward Next Inc.",
-      role: "Front End Engineer",
-      period: "March 2022 - PRESENT",
-      location: "Remote",
-      highlight: "Led engineering teams and shaped custom, high-speed corporate, and Welcart e-commerce WordPress architectures.",
+      role: "Frontend Engineer",
+      period: "March 2022 - November 2025",
+      location: "Makati City",
+      highlight: "Building and shipping production WordPress sites and custom CMS platforms for Japanese clients.",
       details: [
-        "Developed custom WordPress websites, landing pages, and e-commerce solutions. Built responsive interfaces using HTML, CSS/SCSS, JavaScript, and PHP, while optimizing performance, SEO, and user experience. Collaborated with cross-functional teams through code reviews, QA, and version control workflows."
+        "Engineered custom WordPress themes and plugins for 10+ live client sites, reducing average page load time by optimizing asset delivery and lazy loading.",
+        "Led frontend architecture decisions on CMS platforms by coordinating with Japanese managers and UI designers.",
+        "Built responsive, cross-browser layouts from Figma/XD designs using HTML, CSS/SCSS, JavaScript, and TypeScript.",
+        "Conducted device and browser QA across iOS, Android, Chrome, Safari, and Firefox before every client deployment.",
+        "Managed Git version control and collaborated on feature branches with backend and design teams."
       ]
     },
     {
@@ -73,7 +77,7 @@ export default function Experience() {
               </p>
               
               <div className="flex flex-wrap gap-2 pt-3">
-                {["WordPress", "PHP/REST API", "React.JS", "HTML5/CSS3", "JavaScript", "SCSS", "Git", "Figma", "XD", "Illustrator", "Photoshop", "Customer Service", "SEO Tuning"].map((sk, idx) => (
+                {["WordPress", "PHP", "React", "HTML/CSS", "Tailwind", "JavaScript", "TypeScript", "SCSS", "GSAP", "Git", "Vercel", "Figma/XD", "AI Prompt Engineering"].map((sk, idx) => (
                   <span 
                     key={idx}
                     className="text-xs font-mono bg-black border border-white/10 px-3 py-1 font-medium text-zinc-300 hover:text-white transition duration-200"

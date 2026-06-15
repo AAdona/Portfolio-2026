@@ -10,13 +10,13 @@ function ProjectVisualMockup({ id }: { id: string }) {
   let altText = "";
 
   if (id === "my-home") {
-    imgSrc = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80";
+    imgSrc = "../src/assets/images/myhome.png";
     altText = "My Home Custom WordPress Theme Placeholder";
   } else if (id === "aidec-plus") {
-    imgSrc = "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1200&q=80";
+    imgSrc = "../src/assets/images/aidec.png";
     altText = "Aidec Plus Curated Furniture Placeholder";
   } else if (id === "ptruck") {
-    imgSrc = "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=1200&q=80";
+    imgSrc = "../src/assets/images/ptruck.png";
     altText = "PTRUCK Relational Fleet CMS Placeholder";
   } else if (id === "block-forge") {
     imgSrc = blockForgeImg;

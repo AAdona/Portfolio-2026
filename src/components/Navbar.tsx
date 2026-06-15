@@ -95,14 +95,14 @@ export default function Navbar() {
             className="flex items-center gap-3 group text-left cursor-pointer"
           >
             <span className="w-8 h-8 rounded-none bg-white flex items-center justify-center font-serif font-normal italic text-black text-lg transition-transform group-hover:scale-105">
-              p
+              AA
             </span>
             <div>
               <span className="font-sans font-medium text-xs tracking-[0.2em] block text-white">
-                PORTFOLIO
+                AHADONA
               </span>
               <span className="text-[9px] font-mono text-zinc-500 block uppercase tracking-widest leading-none">
-                BUILD_SYS.V2
+                PORTFOLIO_2026
               </span>
             </div>
           </button>
