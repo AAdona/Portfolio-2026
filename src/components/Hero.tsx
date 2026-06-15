@@ -2,11 +2,11 @@ import { motion } from "motion/react";
 import { ArrowDown, Code2, Cpu, Grid, Sparkles } from "lucide-react";
 
 interface HeroProps {
-  onViewProjects: () => void;
+  onViewWork: () => void;
   onContactMe: () => void;
 }
 
-export default function Hero({ onViewProjects, onContactMe }: HeroProps) {
+export default function Hero({ onViewWork, onContactMe }: HeroProps) {
   // Stagger wrapper for initial page load entry
   const containerVars = {
     hidden: { opacity: 0 },
@@ -44,22 +44,13 @@ export default function Hero({ onViewProjects, onContactMe }: HeroProps) {
       >
         {/* Left column: Text Content */}
         <div className="lg:col-span-7 text-left space-y-6">
-          {/* Badge */}
-          <motion.div 
-            variants={itemVars}
-            className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#0c0c0c] border border-white/10 rounded-none text-[10px] font-mono tracking-widest text-white/75 uppercase"
-          >
-            <Sparkles className="w-3 h-3 text-white/50" />
-            <span>AVAILABLE_FOR_CONTRACTS_2026</span>
-          </motion.div>
-
           {/* Heading */}
-          <div className="space-y-2">
+          <div className="space-y-4">
             <motion.p 
               variants={itemVars}
-              className="text-[10px] font-mono text-zinc-500 tracking-[0.25em] uppercase block"
+              className="text-xs md:text-sm font-sans text-zinc-400 font-semibold tracking-wider uppercase block"
             >
-              // FRONTEND DEVELOPER
+              Frontend Developer
             </motion.p>
             <motion.h1 
               variants={itemVars}
@@ -76,7 +67,7 @@ export default function Hero({ onViewProjects, onContactMe }: HeroProps) {
           {/* Subtext */}
           <motion.p 
             variants={itemVars}
-            className="text-sm md:text-base text-zinc-400 max-w-xl font-sans font-normal leading-relaxed"
+            className="text-base md:text-lg text-zinc-350 max-w-xl font-sans font-normal leading-relaxed"
           >
             Building modern, high-performance websites with WordPress, custom CMS solutions, and engaging web interactions.
           </motion.p>
@@ -87,16 +78,16 @@ export default function Hero({ onViewProjects, onContactMe }: HeroProps) {
             className="flex flex-wrap gap-4 pt-4"
           >
             <button
-              onClick={onViewProjects}
-              data-cursor="view_projects"
-              className="px-8 py-4 bg-white text-black hover:bg-white/90 rounded-none font-mono font-bold text-[10px] uppercase tracking-[0.2em] transition-all duration-300 cursor-pointer"
+              onClick={onViewWork}
+              data-cursor="view_work"
+              className="px-10 py-4.5 bg-white text-black hover:bg-white/90 rounded-none font-mono font-bold text-xs md:text-sm uppercase tracking-[0.2em] transition-all duration-300 cursor-pointer"
             >
-              View Projects
+              View Work
             </button>
             <button
               onClick={onContactMe}
               data-cursor="contact_now"
-              className="px-8 py-4 bg-transparent hover:bg-white/5 border border-white/15 hover:border-white/30 text-white rounded-none font-mono text-[10px] uppercase tracking-[0.2em] transition-all duration-300 cursor-pointer"
+              className="px-10 py-4.5 bg-transparent hover:bg-white/5 border border-white/15 hover:border-white/30 text-white rounded-none font-mono text-xs md:text-sm uppercase tracking-[0.2em] transition-all duration-300 cursor-pointer"
             >
               Contact Me
             </button>
@@ -117,7 +108,7 @@ export default function Hero({ onViewProjects, onContactMe }: HeroProps) {
             
             {/* Header tab */}
             <div className="flex items-center justify-between border-b border-white/10 pb-4">
-              <span className="text-[9px] font-mono text-zinc-400 tracking-[0.2em] uppercase">TECH_NODE_MONITOR //</span>
+              <span className="text-xs font-sans text-zinc-300 font-semibold tracking-wider uppercase">Active Stack</span>
               <div className="flex gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-zinc-800" />
                 <span className="w-2 h-2 rounded-full bg-zinc-800 animate-pulse" />
@@ -132,17 +123,15 @@ export default function Hero({ onViewProjects, onContactMe }: HeroProps) {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <Code2 className="w-4 h-4 text-white" />
-                    <span className="text-xs font-mono text-zinc-300 font-bold">REACT_FRONTEND</span>
+                    <span className="text-sm font-sans text-zinc-200 font-bold">React Frontend</span>
                   </div>
-                  <span className="font-mono text-[9px] tracking-wider text-zinc-500">INTERACTIVE</span>
+                  <span className="font-sans text-xs tracking-wider text-zinc-400 font-medium">Interactive</span>
                 </div>
                 <div className="flex flex-wrap gap-1.5 pt-1">
-                  <span className="text-[9px] font-mono bg-black/60 px-2 py-0.5 rounded-none text-zinc-400 border border-white/5">Vite</span>
-                  <span className="text-[9px] font-mono bg-black/60 px-2 py-0.5 rounded-none text-zinc-400 border border-white/5">TypeScript</span>
-                  <span className="text-[9px] font-mono bg-black/60 px-2 py-0.5 rounded-none text-zinc-400 border border-white/5">TailwindCss</span>
+                  <span className="text-xs font-sans bg-black px-2.5 py-1 rounded-none text-zinc-300 border border-white/10">Vite</span>
+                  <span className="text-xs font-sans bg-black px-2.5 py-1 rounded-none text-zinc-300 border border-white/10">TypeScript</span>
+                  <span className="text-xs font-sans bg-black px-2.5 py-1 rounded-none text-zinc-300 border border-white/10">Tailwind CSS</span>
                 </div>
-                {/* Simulated activity pulses */}
-                <div className="absolute right-3 bottom-3 w-1.5 h-1.5 rounded-full bg-white" />
               </div>
 
               {/* WordPress Node block */}
@@ -150,45 +139,38 @@ export default function Hero({ onViewProjects, onContactMe }: HeroProps) {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <Cpu className="w-4 h-4 text-zinc-400" />
-                    <span className="text-xs font-mono text-zinc-300 font-bold">WORDPRESS_CMS</span>
+                    <span className="text-sm font-sans text-zinc-200 font-bold">WordPress CMS</span>
                   </div>
-                  <span className="font-mono text-[9px] text-zinc-500 tracking-wider">CUSTOM_BUILDS</span>
+                  <span className="font-sans text-xs text-zinc-400 tracking-wider font-medium">Custom Builds</span>
                 </div>
                 <div className="flex flex-wrap gap-1.5 pt-1">
-                  <span className="text-[9px] font-mono bg-black/60 px-2 py-0.5 rounded-none text-zinc-400 border border-white/5">Custom_Themes</span>
-                  <span className="text-[9px] font-mono bg-black/60 px-2 py-0.5 rounded-none text-zinc-400 border border-white/5">ACF_Pro</span>
-                  <span className="text-[9px] font-mono bg-black/60 px-2 py-0.5 rounded-none text-zinc-400 border border-white/5">REST_API</span>
+                  <span className="text-xs font-sans bg-black px-2.5 py-1 rounded-none text-zinc-300 border border-white/10">Custom Themes</span>
+                  <span className="text-xs font-sans bg-black px-2.5 py-1 rounded-none text-zinc-300 border border-white/10">ACF Pro</span>
+                  <span className="text-xs font-sans bg-black px-2.5 py-1 rounded-none text-zinc-300 border border-white/10">REST API</span>
                 </div>
-                <div className="absolute right-3 bottom-3 w-1.5 h-1.5 rounded-full bg-zinc-600 animate-ping" />
               </div>
 
               {/* Performance Node */}
               <div className="p-4 bg-black/40 border border-white/5 rounded-none flex items-center justify-between relative hover:border-white/20 transition-all">
                 <div className="flex items-center gap-2">
                   <Grid className="w-4 h-4 text-zinc-400" />
-                  <span className="text-xs font-mono text-zinc-300 font-bold">LIGHTHOUSE_SCORE</span>
+                  <span className="text-sm font-sans text-zinc-200 font-bold">Lighthouse Score</span>
                 </div>
-                <div className="flex items-center gap-2 font-mono">
+                <div className="flex items-center gap-2 font-sans">
                   <div className="h-1 w-12 bg-zinc-900 rounded-none overflow-hidden border border-white/5">
                     <div className="h-full bg-white w-[98%]" />
                   </div>
-                  <span className="text-xs font-bold text-white">98%</span>
+                  <span className="text-sm font-bold text-white">98%</span>
                 </div>
               </div>
-            </div>
-
-            {/* Simulated file path footer */}
-            <div className="flex items-center justify-between text-[9px] font-mono text-zinc-600 border-t border-white/10 pt-3">
-              <span>ROOT/PORTFOLIO/ENGINE.SH</span>
-              <span>RUN_OK</span>
             </div>
           </div>
         </motion.div>
       </motion.div>
 
       {/* Promping scroll bottom label */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-zinc-500 hover:text-white transition duration-300 font-mono select-none">
-        <span className="text-[10px] tracking-[0.25em] uppercase">Scroll_to_discover</span>
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-zinc-400 hover:text-white transition duration-300 font-mono select-none">
+        <span className="text-xs tracking-[0.25em] uppercase font-semibold">Scroll_to_discover</span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 1.5 }}

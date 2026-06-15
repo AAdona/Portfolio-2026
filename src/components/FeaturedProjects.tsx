@@ -1,183 +1,41 @@
 import { useState } from "react";
 import { motion } from "motion/react";
-import { ArrowUpRight, Check, ExternalLink, Globe, HardDrive, LayoutGrid } from "lucide-react";
+import { ArrowUpRight, Check, ExternalLink, Globe, HardDrive, LayoutGrid, Briefcase, Beaker } from "lucide-react";
 import { Project } from "../types";
+import blockForgeImg from "../assets/images/block_forge_preview_1781156128930.png";
+import magnetPhysicsImg from "../assets/images/magnet_physics_preview_1781156143960.png";
 
 function ProjectVisualMockup({ id }: { id: string }) {
+  let imgSrc = "";
+  let altText = "";
+
   if (id === "my-home") {
-    return (
-      <div className="absolute inset-0 flex flex-col justify-between p-4 bg-gradient-to-br from-[#0a0a0a] to-[#040404] text-white select-none">
-        {/* Real Estate Header Mock */}
-        <div className="flex items-center justify-between text-[8px] font-mono text-zinc-500 border-b border-white/5 pb-2">
-          <span>MYHOME // RESIDENCE_ARCHIVE</span>
-          <span>EST_2024</span>
-        </div>
-        {/* Real Estate Body Mock */}
-        <div className="flex-1 flex flex-col justify-center items-center gap-2">
-          <div className="text-center space-y-0.5">
-            <span className="text-[13px] font-serif italic text-white block">find your space.</span>
-            <span className="text-[7px] font-mono text-zinc-650 uppercase tracking-widest block">premium residential database</span>
-          </div>
-          {/* Mock Search Bar */}
-          <div className="w-11/12 flex items-center justify-between border border-white/10 bg-black/40 px-2.5 py-1 text-[7px] font-mono text-zinc-400">
-            <span>Location: Tokyo, Shibuya...</span>
-            <span className="text-white border-l border-white/10 pl-2 text-[6px] tracking-wider uppercase font-bold">SEARCH</span>
-          </div>
-          {/* Wireframe Cards */}
-          <div className="grid grid-cols-3 gap-1.5 w-11/12 pt-1">
-            <div className="border border-white/5 bg-white/[0.02] aspect-video p-1 flex flex-col justify-between">
-              <span className="text-[5px] font-mono text-zinc-650">MIN_UNIT_01</span>
-              <div className="h-0.5 w-[70%] bg-white/20" />
-            </div>
-            <div className="border border-white/5 bg-white/[0.02] aspect-video p-1 flex flex-col justify-between">
-              <span className="text-[5px] font-mono text-zinc-650">MIN_UNIT_02</span>
-              <div className="h-0.5 w-[50%] bg-white/20" />
-            </div>
-            <div className="border border-white/5 bg-white/[0.02] aspect-video p-1 flex flex-col justify-between">
-              <span className="text-[5px] font-mono text-zinc-400">SELECTED</span>
-              <div className="h-0.5 w-[85%] bg-white/40" />
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+    imgSrc = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80";
+    altText = "My Home Custom WordPress Theme Placeholder";
+  } else if (id === "aidec-plus") {
+    imgSrc = "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1200&q=80";
+    altText = "Aidec Plus Curated Furniture Placeholder";
+  } else if (id === "ptruck") {
+    imgSrc = "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=1200&q=80";
+    altText = "PTRUCK Relational Fleet CMS Placeholder";
+  } else if (id === "block-forge") {
+    imgSrc = blockForgeImg;
+    altText = "BlockForge Visual Schema Builder Preview";
+  } else if (id === "magnet-physics") {
+    imgSrc = magnetPhysicsImg;
+    altText = "Active Physics Dynamic Fluid Interactions Preview";
   }
-  if (id === "aidec-plus") {
-    return (
-      <div className="absolute inset-0 flex flex-col justify-between p-4 bg-gradient-to-tr from-[#050505] to-[#121212] text-white select-none">
-        {/* Furniture Agency Header */}
-        <div className="flex items-center justify-between text-[8px] font-mono text-zinc-500 border-b border-white/5 pb-2">
-          <span>AIDEC_SYSTEM // METRIC_CRAFTS</span>
-          <span>CURATED_2023</span>
-        </div>
-        {/* Design Wireframe Body Mock */}
-        <div className="flex-1 flex gap-4 items-center justify-center px-1">
-          {/* Left Side: Curated Grid selection */}
-          <div className="flex-1 flex flex-col gap-1 h-full justify-center text-left">
-            <span className="text-[11px] font-serif font-light text-zinc-200 leading-tight">curated modern chairs.</span>
-            <span className="text-[6px] font-mono text-zinc-500 uppercase tracking-widest block">Model SC-291</span>
-            <div className="h-0.5 bg-white/20 w-3/4" />
-          </div>
-          {/* Right Side: Visual Chair Schematic vector drawing using CSS */}
-          <div className="w-[85px] h-[75px] border border-white/10 bg-black/60 relative flex items-center justify-center overflow-hidden">
-            <div className="absolute inset-0 bg-grid opacity-15 pointer-events-none" />
-            {/* Minimalist modern chair outline drawing using pure CSS lines/divs */}
-            <div className="relative w-9 h-11 border border-white/20 rounded-t-sm flex flex-col justify-between p-0.5">
-              <div className="h-0.5 w-full bg-white/30" />
-              <div className="flex justify-between w-full h-6">
-                <div className="w-[1px] bg-white/30 h-full" />
-                <div className="relative w-4 h-4 border-t border-r border-white/15 self-end" />
-                <div className="w-[1px] bg-white/30 h-full" />
-              </div>
-            </div>
-            {/* Dimensions notation overlay */}
-            <span className="absolute bottom-0.5 right-1 text-[5px] font-mono text-zinc-550">620 x 580 x 810mm</span>
-            <span className="absolute top-0.5 left-1 text-[5px] font-mono text-zinc-400 font-bold">AID_C29</span>
-          </div>
-        </div>
-      </div>
-    );
-  }
-  if (id === "ptruck") {
-    return (
-      <div className="absolute inset-0 flex flex-col justify-between p-4 bg-gradient-to-br from-[#0a0a0a] to-[#060c12] text-white select-none">
-        {/* Logistics CMS Header */}
-        <div className="flex items-center justify-between text-[8px] font-mono text-zinc-500 border-b border-white/5 pb-2">
-          <span>PTRUCK // VEHICLE_SOLUTIONS</span>
-          <span>VERSION_3.24</span>
-        </div>
-        {/* Body Mock: Logistics database row details */}
-        <div className="flex-1 flex flex-col justify-center gap-1 text-left">
-          <span className="text-[11px] font-sans font-light tracking-tight text-white">
-            PTRUCK <span className="font-serif italic font-normal text-zinc-400">Database Search</span>
-          </span>
-          {/* Database simulation table list with custom details */}
-          <div className="border border-white/10 bg-black/50 p-1.5 space-y-1 font-mono text-[6px] text-zinc-400">
-            <div className="flex justify-between text-zinc-650 border-b border-white/5 pb-0.5">
-              <span>TRUCK_MODEL_ID</span>
-              <span>ENGINE_SPEC</span>
-              <span>STATE</span>
-            </div>
-            <div className="flex justify-between text-zinc-300">
-              <span className="font-bold text-white">FUSO_CANTER_01</span>
-              <span>7.5L_DIESEL</span>
-              <span className="text-white">IN_STOCK</span>
-            </div>
-            <div className="flex justify-between">
-              <span>ISUZU_GIGA_TRK</span>
-              <span>9.8L_TURBO</span>
-              <span className="text-zinc-600">RESERVED</span>
-            </div>
-            <div className="flex justify-between">
-              <span>HINO_PROFIA_049</span>
-              <span>8.9L_ENERGY</span>
-              <span className="text-zinc-300">ARRIVING</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-  if (id === "block-forge") {
-    return (
-      <div className="absolute inset-0 flex flex-col justify-between p-4 bg-gradient-to-br from-[#0c0c0c] to-[#050512] text-white select-none">
-        {/* Schema Engine Header */}
-        <div className="flex items-center justify-between text-[8px] font-mono text-zinc-500 border-b border-white/5 pb-2">
-          <span>BLOCKFORGE // CORE_ENGINE</span>
-          <span>COMPILING_STREAMS</span>
-        </div>
-        {/* Schema Matrix GUI */}
-        <div className="flex-1 flex gap-3 items-center justify-center">
-          <div className="space-y-1 text-left">
-            <span className="text-[12px] font-serif text-white italic block leading-none">nest schemas.</span>
-            <span className="text-[6px] font-mono text-zinc-500 block">DRAG-N-DROP BLOCKS MATRIX</span>
-          </div>
-          <div className="flex flex-col gap-1 w-[100px] border border-white/10 bg-black/60 p-1">
-            <div className="border border-white/5 bg-zinc-950 p-1 text-[5px] font-mono flex items-center justify-between">
-              <span className="text-zinc-400">#hero-container</span>
-              <span className="text-[4px] bg-white/10 px-1 py-0.5 rounded-none text-zinc-400">GRID</span>
-            </div>
-            <div className="border border-emerald-500/20 bg-emerald-950/10 p-1 text-[5px] font-mono flex items-center justify-between">
-              <span className="text-emerald-400">#feature-cards</span>
-              <span className="text-[4px] bg-emerald-500/25 px-1 py-0.5 text-emerald-400">FLEX</span>
-            </div>
-            <div className="border border-white/5 bg-zinc-950 p-1 text-[5px] font-mono flex items-center justify-between">
-              <span className="text-zinc-650">+ append node</span>
-              <span className="text-[4px] text-zinc-650">APPEND</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-  if (id === "magnet-physics") {
-    return (
-      <div className="absolute inset-0 flex flex-col justify-between p-4 bg-gradient-to-tr from-[#080808] to-[#12080a] text-white select-none">
-        {/* Magnetic Interactions Header */}
-        <div className="flex items-center justify-between text-[8px] font-mono text-zinc-500 border-b border-white/5 pb-2">
-          <span>ACTIVE_MAGNET // POINTER_PHYSICS</span>
-          <span>SIMULATE_STABLE</span>
-        </div>
-        {/* Vector coordinates */}
-        <div className="flex-1 flex gap-4 items-center justify-center">
-          <div className="space-y-1 text-left flex-1">
-            <span className="text-[11px] font-sans text-rose-300 block leading-tight">magnetic grids.</span>
-            <span className="text-[5px] font-mono text-zinc-500 block">DENSITY COEFFICIENT: 0.82v</span>
-          </div>
-          {/* Visual dynamic node radar */}
-          <div className="w-[70px] h-[70px] rounded-full border border-white/10 relative flex items-center justify-center">
-            <div className="absolute w-[45px] h-[45px] rounded-full border border-dashed border-white/5" />
-            <div className="absolute w-1.5 h-1.5 bg-rose-500 rounded-full animate-ping" />
-            <div className="absolute w-1 h-1 bg-white rounded-full" />
-            {/* Coordinate line indicators */}
-            <div className="absolute inset-0 h-[1px] w-full bg-white/5 top-1/2" />
-            <div className="absolute inset-0 w-[1px] h-full bg-white/5 left-1/2" />
-          </div>
-        </div>
-      </div>
-    );
-  }
-  return null;
+
+  return (
+    <div className="absolute inset-0 bg-[#080808] flex items-center justify-center overflow-hidden">
+      <img 
+        src={imgSrc} 
+        alt={altText}
+        referrerPolicy="no-referrer"
+        className="w-full h-full object-cover object-top opacity-85 group-hover:opacity-95 transition-all duration-500 scale-[1.01]"
+      />
+    </div>
+  );
 }
 
 export default function FeaturedProjects() {
@@ -269,7 +127,7 @@ export default function FeaturedProjects() {
 
   return (
     <section 
-      id="projects" 
+      id="work" 
       className="relative min-h-screen py-24 px-6 bg-[#050505]"
     >
       {/* Visual ambient noise */}
@@ -279,50 +137,82 @@ export default function FeaturedProjects() {
       <div className="max-w-7xl mx-auto space-y-16">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 border-b border-white/10 pb-10">
-          <div className="space-y-2">
-            <span className="text-[10px] font-mono text-zinc-500 tracking-[0.25em] uppercase block">
-              // RECENT_ACCOMPLISHMENTS
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 border-b border-white/10 pb-12">
+          <div className="space-y-3">
+            <span className="text-xs md:text-sm font-sans text-zinc-400 font-semibold tracking-wider uppercase block">
+              Recent Case Studies
             </span>
-            <h2 className="text-3xl md:text-5xl font-sans font-light tracking-tight text-white uppercase">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-sans font-light tracking-tight text-white uppercase">
               Featured <span className="font-serif italic font-normal text-zinc-300">Works.</span>
             </h2>
           </div>
-          <p className="max-w-md text-xs text-zinc-500 font-sans leading-relaxed">
+          <p className="max-w-lg text-sm md:text-base text-zinc-400 font-sans leading-relaxed">
             Real-world CMS platforms and specialized internal application architectures engineered to combine design aesthetics with fast execution times.
           </p>
         </div>
 
         {/* Tab Selection Filter */}
-        <div className="flex gap-6 border-b border-white/5 pb-2 pt-2">
-          <button 
-            onClick={() => {
-              setActiveTab("commercial");
-              setHoveredIdx(null);
-            }}
-            data-cursor="pointer"
-            className={`font-mono text-[10px] tracking-widest pb-3 border-b-2 uppercase transition-all duration-300 cursor-pointer ${
-              activeTab === "commercial" 
-                ? "border-white text-white font-semibold" 
-                : "border-transparent text-zinc-500 hover:text-zinc-350"
-            }`}
-          >
-            [01] Commercial Client Suites
-          </button>
-          <button 
-            onClick={() => {
-              setActiveTab("personal");
-              setHoveredIdx(null);
-            }}
-            data-cursor="pointer"
-            className={`font-mono text-[10px] tracking-widest pb-3 border-b-2 uppercase transition-all duration-300 cursor-pointer ${
-              activeTab === "personal" 
-                ? "border-white text-white font-semibold" 
-                : "border-transparent text-zinc-500 hover:text-zinc-350"
-            }`}
-          >
-            [02] Personal Laboratories
-          </button>
+        <div className="flex justify-start pt-2">
+          <div className="inline-flex p-1 bg-zinc-950/80 border border-white/15 rounded-xl select-none w-full sm:w-auto overflow-hidden">
+            <button
+              onClick={() => {
+                setActiveTab("commercial");
+                setHoveredIdx(null);
+              }}
+              data-cursor="pointer"
+              className={`relative flex items-center justify-center gap-2.5 py-3 px-6 rounded-lg text-xs md:text-sm font-mono uppercase tracking-widest transition-colors duration-300 cursor-pointer min-w-[200px] ${
+                activeTab === "commercial" ? "text-black font-bold" : "text-zinc-500 hover:text-zinc-200"
+              }`}
+            >
+              {activeTab === "commercial" && (
+                <motion.div
+                  layoutId="activeTabIndicator"
+                  className="absolute inset-0 bg-white rounded-lg"
+                  transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                />
+              )}
+              <span className="relative z-10 flex items-center gap-2">
+                <Briefcase className="w-4 h-4" />
+                [01] Commercial Suites
+              </span>
+              <span className={`relative z-10 text-xs px-2.5 py-0.5 rounded-sm font-sans font-extrabold ${
+                activeTab === "commercial" 
+                  ? "bg-black/10 text-black/85" 
+                  : "bg-white/5 text-zinc-400"
+              }`}>
+                3
+              </span>
+            </button>
+            <button
+              onClick={() => {
+                setActiveTab("personal");
+                setHoveredIdx(null);
+              }}
+              data-cursor="pointer"
+              className={`relative flex items-center justify-center gap-2.5 py-3 px-6 rounded-lg text-xs md:text-sm font-mono uppercase tracking-widest transition-colors duration-300 cursor-pointer min-w-[200px] ${
+                activeTab === "personal" ? "text-black font-bold" : "text-zinc-500 hover:text-zinc-200"
+              }`}
+            >
+              {activeTab === "personal" && (
+                <motion.div
+                  layoutId="activeTabIndicator"
+                  className="absolute inset-0 bg-white rounded-lg"
+                  transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                />
+              )}
+              <span className="relative z-10 flex items-center gap-2">
+                <Beaker className="w-4 h-4" />
+                [02] Personal Labs
+              </span>
+              <span className={`relative z-10 text-xs px-2.5 py-0.5 rounded-sm font-sans font-extrabold ${
+                activeTab === "personal" 
+                  ? "bg-black/10 text-black/85" 
+                  : "bg-white/5 text-zinc-400"
+              }`}>
+                2
+              </span>
+            </button>
+          </div>
         </div>
 
         {/* Projects list */}
@@ -347,34 +237,34 @@ export default function FeaturedProjects() {
                     className="relative w-full aspect-video rounded-none border border-white/10 bg-[#0c0c0c] overflow-hidden shadow-2xl group flex flex-col justify-between"
                   >
                     {/* Browser Header Bar */}
-                    <div className="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-[#0a0a0a]">
+                    <div className="flex items-center justify-between px-4 py-3.5 border-b border-white/5 bg-[#0a0a0a]">
                       {/* Interactive window dots */}
                       <div className="flex gap-2">
-                        <span className="w-1.5 h-1.5 rounded-none bg-zinc-800" />
-                        <span className="w-1.5 h-1.5 rounded-none bg-zinc-800" />
-                        <span className="w-1.5 h-1.5 rounded-none bg-zinc-800" />
+                        <span className="w-2 h-2 rounded-none bg-zinc-850" />
+                        <span className="w-2 h-2 rounded-none bg-zinc-850" />
+                        <span className="w-2 h-2 rounded-none bg-zinc-850" />
                       </div>
                       
                       {/* URL Box */}
-                      <div className="flex items-center gap-1.5 px-3 py-1 bg-black border border-white/5 rounded-none text-[9px] font-mono text-zinc-500 w-[60%] justify-center overflow-hidden whitespace-nowrap">
-                        <Globe className="w-2.5 h-2.5 text-zinc-600" />
+                      <div className="flex items-center gap-1.5 px-4 py-1 bg-black border border-white/5 rounded-none text-[11px] font-mono text-zinc-450 w-[60%] justify-center overflow-hidden whitespace-nowrap">
+                        <Globe className="w-3.5 h-3.5 text-zinc-500" />
                         <span>{proj.url.replace("https://", "")}</span>
                       </div>
                       
-                      <HardDrive className="w-3.5 h-3.5 text-zinc-700" />
+                      <HardDrive className="w-4 h-4 text-zinc-700" />
                     </div>
-
+ 
                     {/* Inside Canvas display mockup */}
-                    <div className="flex-1 p-6 relative overflow-hidden select-none min-h-[200px]">
+                    <div className="flex-1 p-6 relative overflow-hidden select-none min-h-[220px]">
                       {/* Dynamically Rendered Visual Wireframe Preview */}
                       <ProjectVisualMockup id={proj.id} />
                       
                       {/* Overlay Premium Hover Interaction State */}
-                      <div className="absolute inset-0 bg-black/85 opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-center items-center gap-1 z-10 backdrop-blur-[2px]">
-                        <h4 className="text-sm font-sans font-medium text-white tracking-wider uppercase">
+                      <div className="absolute inset-0 bg-black/85 opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-center items-center gap-1.5 z-10 backdrop-blur-[2px]">
+                        <h4 className="text-base md:text-lg font-sans font-semibold text-white tracking-wider uppercase">
                           {proj.title}
                         </h4>
-                        <span className="text-[9px] font-mono text-zinc-400 uppercase tracking-widest block pb-3">
+                        <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest block pb-4">
                           {proj.category}
                         </span>
                         <a 
@@ -382,58 +272,58 @@ export default function FeaturedProjects() {
                           target="_blank"
                           rel="noreferrer"
                           data-cursor="view_live"
-                          className="flex items-center gap-2 px-5 py-2.5 bg-white text-black rounded-none text-[10px] font-mono font-bold tracking-widest uppercase transition-all duration-300 transform scale-95 group-hover:scale-100 cursor-pointer shadow-md"
+                          className="flex items-center gap-2 px-6 py-3 bg-white text-black rounded-none text-xs font-mono font-bold tracking-widest uppercase transition-all duration-300 transform scale-95 group-hover:scale-100 cursor-pointer shadow-md"
                         >
-                          Launch Project <ExternalLink className="w-3 h-3" />
+                          Launch Project <ExternalLink className="w-3.5 h-3.5" />
                         </a>
                       </div>
                     </div>
-
+ 
                     {/* Browser Footer - Performance Stats */}
-                    <div className="px-5 py-3 border-t border-white/5 bg-[#0a0a0a] flex items-center justify-between text-[9px] font-mono rounded-none">
-                      <span className="text-zinc-600 uppercase">SYS_PERFORMANCE: OK</span>
+                    <div className="px-5 py-3.5 border-t border-white/5 bg-[#0a0a0a] flex items-center justify-between text-[11px] font-mono rounded-none">
+                      <span className="text-zinc-500 uppercase font-medium">SYS_PERFORMANCE: OK</span>
                       <div className="flex gap-4">
                         {proj.stats?.map((st, sidx) => (
                           <div key={sidx} className="flex gap-1.5 items-center">
-                            <span className="text-zinc-500">{st.label}:</span>
-                            <span className="text-white font-mono">{st.value}</span>
+                            <span className="text-zinc-450">{st.label}:</span>
+                            <span className="text-white font-mono font-bold">{st.value}</span>
                           </div>
                         ))}
                       </div>
                     </div>
                   </motion.div>
                 </div>
-
+ 
                 {/* Text explanation block (Cols 7 to 12) */}
                 <div className="lg:col-span-6 space-y-6">
                   {/* Category tag */}
-                  <span className="text-[10px] font-mono text-zinc-500 tracking-[0.2em] uppercase block">
+                  <span className="text-xs font-mono text-zinc-400 font-semibold tracking-[0.2em] uppercase block">
                     {proj.category} &bull; {proj.year}
                   </span>
                   
                   {/* Main Title */}
-                  <h3 className="text-2xl md:text-3xl font-serif font-light lowercase text-white tracking-tight italic">
+                  <h3 className="text-3xl md:text-4xl font-serif font-light lowercase text-white tracking-tight italic">
                     {proj.title}.
                   </h3>
-
+ 
                   {/* Description text */}
-                  <p className="text-xs text-zinc-400 font-sans leading-relaxed">
+                  <p className="text-sm md:text-base text-zinc-300 font-sans leading-relaxed">
                     {proj.description}
                   </p>
-
+ 
                   {/* Tags */}
                   <div className="flex flex-wrap gap-2 pt-6 border-t border-white/10">
                     {proj.tags.map((tag, tidx) => (
                       <span 
                         key={tidx}
-                        className="px-3 py-1 rounded-none bg-[#0c0c0c] border border-white/5 text-[9px] font-mono text-zinc-500 uppercase tracking-widest"
+                        className="px-3.5 py-1.5 rounded-none bg-[#0c0c0c] border border-white/5 text-xs font-mono text-zinc-350 uppercase tracking-widest"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
                 </div>
-
+ 
               </div>
             );
           })}
