@@ -60,7 +60,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
       <div className="flex items-center justify-between text-xs font-mono tracking-widest text-brand-text-muted">
         <span className="flex items-center gap-2">
           <span className="h-1.5 w-1.5 rounded-full bg-brand-orange animate-ping" />
-          DESIGN_AGENCY_PORTFOLIO_V2.0
+          ADONA_PORTFOLIO_V2.0
         </span>
         <span>SYS_STATUS: ACTIVE</span>
       </div>
