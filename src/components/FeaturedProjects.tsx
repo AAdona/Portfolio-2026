@@ -17,11 +17,8 @@ function ProjectVisualMockup({ id }: { id: string }) {
     imgSrc = "/images/ptruck.png";
     altText = "PTRUCK Relational Fleet CMS Placeholder";
   } else if (id === "block-forge") {
-    imgSrc = "/images/block_forge_preview_1781156128930.png";
-    altText = "BlockForge Visual Schema Builder Preview";
-  } else if (id === "magnet-physics") {
-    imgSrc = "/images/magnet_physics_preview_1781156143960.png";
-    altText = "Active Physics Dynamic Fluid Interactions Preview";
+    imgSrc = "/images/adi-convert.png";
+    altText = "adi-convert Image Converter Preview";
   }
 
   return (
@@ -49,7 +46,7 @@ export default function FeaturedProjects() {
       role: "Lead CMS Architect & Frontend Specialist",
       year: "2024",
       category: "REAL ESTATE PORTAL",
-      tags: ["WordPress", "Frontend Dev", "ACF Pro", "CMS Architecture"],
+      tags: ["WordPress", "PUG", "CSS/SCSS", "Typescript", "Git"],
       achievements: [],
       stats: [
         { label: "LCP", value: "1.1s" },
@@ -64,7 +61,7 @@ export default function FeaturedProjects() {
       role: "Senior Themes Engineer",
       year: "2023",
       category: "DESIGN & MFG PORTAL",
-      tags: ["WordPress", "Custom Block Themes", "Responsive UI", "CSS/SCSS"],
+      tags: ["WordPress", "Custom Block Themes", "CSS/SCSS", "PUG", "Typescript", "Git"],
       achievements: [],
       stats: [
         { label: "LCP", value: "1.2s" },
@@ -79,7 +76,7 @@ export default function FeaturedProjects() {
       role: "Core Technical Frontend Lead",
       year: "2023",
       category: "ENTERPRISE CORP CMS",
-      tags: ["WordPress", "Relational CMS", "Speed Tuning", "SCSS"],
+      tags: ["WordPress", "Relational CMS", "Speed Tuning", "CSS/SCSS"],
       achievements: [],
       stats: [
         { label: "FCP", value: "0.9s" },
@@ -91,32 +88,17 @@ export default function FeaturedProjects() {
   const personalProjects: Project[] = [
     {
       id: "block-forge",
-      title: "BlockForge CMS",
-      url: "https://github.com/keepcalm0023/blockforge",
-      description: "A lightweight visual schema builder modeling ACF and Gutenberg block nests. Exporting high-performance custom JSON configurations natively.",
+      title: "adi-convert",
+      url: "https://adi-convert.vercel.app/",
+      description: "An image-converter/compressor web application using a custom-built canvas engine to achieve high-quality results with minimal file sizes.",
       role: "Creator & Developer",
-      year: "2024",
+      year: "2026",
       category: "LABORATORY GRAPHICS",
-      tags: ["TypeScript", "Canvas Engine", "JSON Schema", "Tailwind"],
+      tags: ["React", "Tailwind", "Canvas API", "Web Workers", "Vite", "Git", "Vercel"],
       achievements: [],
       stats: [
         { label: "Weight", value: "14kb" },
         { label: "Rendering", value: "60fps" }
-      ]
-    },
-    {
-      id: "magnet-physics",
-      title: "Active Physics",
-      url: "https://github.com/keepcalm0023/active-physics",
-      description: "An experimental interactive canvas exploring magnetic proximity equations and custom dynamic spring constants for high-fidelity portfolio menus.",
-      role: "Creator & Developer",
-      year: "2023",
-      category: "DYNAMICS MODULE",
-      tags: ["TypeScript", "Tailwind", "Pointer Vectors", "Math Engine"],
-      achievements: [],
-      stats: [
-        { label: "Load Time", value: "0.2s" },
-        { label: "Accuracy", value: "99.9%" }
       ]
     }
   ];
