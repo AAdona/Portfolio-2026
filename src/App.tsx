@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import LoadingScreen from "./components/LoadingScreen";
 import CustomCursor from "./components/CustomCursor";
 import Navbar from "./components/Navbar";
@@ -109,6 +110,7 @@ export default function App() {
 
         </motion.div>
       )}
+      <SpeedInsights />
     </>
   );
 }
