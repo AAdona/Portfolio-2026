@@ -1,26 +1,14 @@
-# Adrian Hero Adona
+# Portfolio
 
-Personal portfolio website showcasing my projects, skills, and experience as a Frontend Developer.
+Source code for my portfolio site: https://www.adrianadona.lol
 
-🌐 Live Site: https://www.adrianadona.lol/
+Built with React, TypeScript, Tailwind CSS and Vite.
 
-## About
-
-This repository contains the source code for my personal portfolio website. It highlights selected projects, technical expertise, and professional experience in building modern, responsive, and user-focused web applications.
-
-## Tech Stack
-
-- React
-- Tailwind CSS
-- JavaScript
-- Vite
-
-### Prerequisites
-
-- Node.js
-- npm
-
-### Installation
+## Run locally
 
 ```bash
 npm install
+npm run dev
+```
+
+The dev server runs on http://localhost:3000. Use `npm run build` to create a production build in `dist`.

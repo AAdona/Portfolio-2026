@@ -1,283 +1,63 @@
-import React from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { Mail, Linkedin, ArrowUpRight, Check, Download, Send, CheckCircle2 } from "lucide-react";
-import { useForm, ValidationError } from '@formspree/react';
+import { useForm, ValidationError } from "@formspree/react";
+
+const linkClass =
+  "underline decoration-line underline-offset-4 transition-colors hover:decoration-fg";
+
+const fieldClass =
+  "w-full rounded border border-line bg-transparent px-3 py-2 text-sm text-fg outline-none transition-colors focus:border-muted";
 
 export default function Contact() {
   const [state, handleSubmit] = useForm("mpqebzzd");
-  const [downloadState, setDownloadState] = React.useState<"idle" | "preparing" | "ready">("idle");
-
-  const handleDownload = () => {
-    if (downloadState !== "idle") return;
-    setDownloadState("preparing");
-    
-    setTimeout(() => {
-      setDownloadState("ready");
-      
-      const element = document.createElement("a");
-      element.href = "/CV-ADONA.pdf";
-      element.download = "CV-ADONA.pdf";
-      document.body.appendChild(element);
-      element.click();
-      document.body.removeChild(element);
-
-      setTimeout(() => {
-        setDownloadState("idle");
-      }, 3000);
-    }, 1500);
-  };
 
   return (
-    <section 
-      id="contact" 
-      className="relative min-h-[90vh] py-24 px-6 bg-[#050505] flex flex-col justify-center animate-fade-in"
-    >
-      {/* Background radial highlight */}
-      <div className="absolute inset-0 bg-grid opacity-10 pointer-events-none" />
-      <div className="absolute inset-0 bg-noise pointer-events-none" />
-      <div className="absolute bottom-0 right-[5%] w-[45vw] h-[45vw] rounded-full bg-white/1 blur-[120px] pointer-events-none mask-radial" />
+    <section id="contact" className="mx-auto max-w-3xl border-t border-line px-6 py-16">
+      <h2 className="mb-6 text-2xl font-semibold tracking-tight">Contact</h2>
+      <p className="max-w-xl text-body">
+        The quickest way to reach me is{" "}
+        <a href="mailto:adrianheroadona@gmail.com" className={linkClass}>
+          adrianheroadona@gmail.com
+        </a>
+        . You can also find me on{" "}
+        <a href="https://linkedin.com/in/ahadona" target="_blank" rel="noreferrer" className={linkClass}>
+          LinkedIn
+        </a>{" "}
+        or use the form below.
+      </p>
 
-      <div className="max-w-7xl mx-auto space-y-16 relative z-10 w-full">
-        
-        {/* Section Heading */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 border-b border-white/10 pb-12">
-          <div className="space-y-3">
-            <span className="text-xs md:text-sm font-sans text-zinc-400 font-semibold tracking-wider uppercase block">
-              COLLABORATE
-            </span>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-sans font-light tracking-tight text-white uppercase">
-              Get in <span className="font-serif italic font-normal text-zinc-300">Touch.</span>
-            </h2>
+      {state.succeeded ? (
+        <p className="mt-10 text-body">Thanks, your message has been sent.</p>
+      ) : (
+        <form onSubmit={handleSubmit} className="mt-10 max-w-xl space-y-5">
+          <div className="space-y-2">
+            <label htmlFor="name" className="block text-sm text-muted">
+              Name
+            </label>
+            <input id="name" type="text" name="name" required className={fieldClass} />
+            <ValidationError prefix="Name" field="name" errors={state.errors} className="text-sm text-red-400" />
           </div>
-          <p className="max-w-lg text-sm md:text-base text-zinc-400 font-sans leading-relaxed">
-            Let's build high-performance websites. Connect with me on LinkedIn, send a direct email, or use the contact form below.
-          </p>
-        </div>
-
-        {/* Primary Contact Area Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-          
-          {/* Left Column */}
-          <div className="lg:col-span-5 space-y-8">
-            <div className="space-y-4">
-              <span className="text-xs md:text-sm font-sans text-zinc-400 uppercase tracking-wider block font-semibold">
-                My Focus
-              </span>
-              <h3 className="text-xl md:text-2xl font-serif italic text-white leading-relaxed font-normal">
-                Engineering high-performance custom WordPress themes, fluid layouts, and detailed responsive interfaces.
-              </h3>
-              <p className="text-sm md:text-base text-zinc-300 font-sans leading-relaxed">
-                I focus on pristine typography pairing, layouts using balanced negative space, responsive structures, fast-loading bundle weights, and clean semantic code.
-              </p>
-            </div>
-
-            <div className="space-y-4 pt-4">
-              <span className="text-xs md:text-sm font-sans text-zinc-400 uppercase tracking-wider block font-semibold border-b border-white/10 pb-3">
-                Quick Links &amp; Downloads
-              </span>
-
-              <div className="space-y-3.5 pt-2">
-                <a 
-                  href="mailto:adrianheroadona@gmail.com" 
-                  data-cursor="email_me"
-                  className="group flex items-center justify-between p-5 bg-[#0c0c0c] border border-white/10 hover:border-white/30 rounded-none transition duration-300"
-                >
-                  <div className="flex items-center gap-4">
-                    <span className="w-12 h-12 rounded-none bg-black border border-white/5 flex items-center justify-center text-white group-hover:border-white transition-all">
-                      <Mail className="w-5 h-5" />
-                    </span>
-                    <div>
-                      <span className="text-xs font-sans text-zinc-400 font-semibold uppercase block leading-none">
-                        Direct Email
-                      </span>
-                      <span className="text-sm md:text-base font-sans text-white hover:text-zinc-300 transition block mt-1.5 font-medium">
-                        adrianheroadona@gmail.com
-                      </span>
-                    </div>
-                  </div>
-                  <ArrowUpRight className="w-5 h-5 text-zinc-500 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition" />
-                </a>
-
-                <a 
-                  href="https://linkedin.com/in/ahadona" 
-                  target="_blank" 
-                  rel="noreferrer"
-                  data-cursor="linkedin"
-                  className="group flex items-center justify-between p-5 bg-[#0c0c0c] border border-white/10 hover:border-white/30 rounded-none transition duration-300"
-                >
-                  <div className="flex items-center gap-4">
-                    <span className="w-12 h-12 rounded-none bg-black border border-white/5 flex items-center justify-center text-white group-hover:border-white transition-all">
-                      <Linkedin className="w-5 h-5" />
-                    </span>
-                    <div>
-                      <span className="text-xs font-sans text-zinc-400 font-semibold uppercase block leading-none">
-                        LinkedIn Connect
-                      </span>
-                      <span className="text-sm md:text-base font-sans text-white block mt-1.5 font-medium">
-                        Adrian Hero Adona (Profile)
-                      </span>
-                    </div>
-                  </div>
-                  <ArrowUpRight className="w-5 h-5 text-zinc-500 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition" />
-                </a>
-
-                <button 
-                  onClick={handleDownload}
-                  data-cursor="pointer"
-                  className={`w-full flex items-center justify-between p-5 border transition duration-500 rounded-none group cursor-pointer ${
-                    downloadState === "ready" 
-                      ? "bg-emerald-950/20 border-emerald-500/40 text-emerald-400"
-                      : "bg-[#0c0c0c] border-white/10 hover:border-white text-white"
-                  }`}
-                >
-                  <div className="flex items-center gap-4 text-left">
-                    <span className={`w-12 h-12 rounded-none flex items-center justify-center transition-all ${
-                      downloadState === "ready"
-                        ? "bg-emerald-950 border border-emerald-500 text-emerald-400 animate-bounce"
-                        : "bg-black border border-white/5 text-white group-hover:border-white"
-                    }`}>
-                      {downloadState === "ready" ? <Check className="w-5 h-5" /> : <Download className="w-5 h-5" />}
-                    </span>
-                    <div>
-                      <span className={`text-xs font-sans uppercase block leading-none font-semibold ${
-                        downloadState === "ready" ? "text-emerald-400" : "text-zinc-400"
-                      }`}>
-                        {downloadState === "idle" && "Complete Resume"}
-                        {downloadState === "preparing" && "Preparing Resume..."}
-                        {downloadState === "ready" && "Resume Downloaded!"}
-                      </span>
-                      <span className="text-sm md:text-base font-sans block mt-1.5 text-zinc-200">
-                        {downloadState === "idle" && "Download Resume"}
-                        {downloadState === "preparing" && "Retrieving file..."}
-                        {downloadState === "ready" && "CV-ADONA.pdf downloaded!"}
-                      </span>
-                    </div>
-                  </div>
-                  <ArrowUpRight className={`w-5 h-5 transition ${
-                    downloadState === "ready" ? "text-emerald-450 rotate-90" : "text-zinc-500 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  }`} />
-                </button>
-              </div>
-            </div>
+          <div className="space-y-2">
+            <label htmlFor="email" className="block text-sm text-muted">
+              Email
+            </label>
+            <input id="email" type="email" name="email" required className={fieldClass} />
+            <ValidationError prefix="Email" field="email" errors={state.errors} className="text-sm text-red-400" />
           </div>
-
-          {/* Right Column: Form */}
-          <div className="lg:col-span-7 p-8 md:p-10 bg-[#0c0c0c] border border-white/10 rounded-none space-y-6 relative">
-            <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-            
-            <div className="space-y-2">
-              <span className="text-xs font-sans text-zinc-400 uppercase tracking-wider block font-semibold">
-                Send a Message
-              </span>
-              <p className="text-sm text-zinc-400 font-sans">
-                Fill out this form to send a message directly to my inbox.
-              </p>
-            </div>
-
-            <AnimatePresence mode="wait">
-              {state.succeeded ? (
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  className="py-12 flex flex-col items-center justify-center text-center space-y-4"
-                >
-                  <div className="w-16 h-16 rounded-full bg-emerald-950/30 border border-emerald-500 flex items-center justify-center text-emerald-400">
-                    <CheckCircle2 className="w-8 h-8" />
-                  </div>
-                  <div className="space-y-1">
-                    <h4 className="text-xl font-serif italic text-white flex items-center justify-center gap-2">
-                      Message Sent!
-                    </h4>
-                    <p className="text-sm text-zinc-400 font-sans max-w-xs mx-auto">
-                      Thank you for your message. I will review and reply within 12 business hours.
-                    </p>
-                  </div>
-                  <span className="text-[10px] font-sans text-emerald-400/80 uppercase tracking-wider block pt-2">
-                    Status: Active
-                  </span>
-                </motion.div>
-              ) : (
-                <motion.form
-                  onSubmit={handleSubmit}
-                  initial={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="space-y-6 pt-2"
-                >
-                  {/* Name field */}
-                  <div className="space-y-2">
-                    <label className="text-xs font-sans text-zinc-400 uppercase tracking-wider block font-medium">
-                      Your Name *
-                    </label>
-                    <input 
-                      type="text"
-                      name="name"
-                      required
-                      placeholder="e.g. Juan Dela Cruz"
-                      className="w-full px-4 py-3.5 bg-black/50 border border-white/10 text-white placeholder-zinc-650 rounded-none focus:outline-none focus:border-white/40 focus:ring-0 text-sm transition duration-300 font-sans"
-                    />
-                    <ValidationError prefix="Name" field="name" errors={state.errors} className="text-red-400 text-xs font-sans" />
-                  </div>
-
-                  {/* Email field */}
-                  <div className="space-y-2">
-                    <label className="text-xs font-sans text-zinc-400 uppercase tracking-wider block font-medium">
-                      Your Email Address *
-                    </label>
-                    <input 
-                      type="email"
-                      name="email"
-                      required
-                      placeholder="e.g. email@domain.com"
-                      className="w-full px-4 py-3.5 bg-black/50 border border-white/10 text-white placeholder-zinc-655 rounded-none focus:outline-none focus:border-white/40 focus:ring-0 text-sm transition duration-300 font-sans"
-                    />
-                    <ValidationError prefix="Email" field="email" errors={state.errors} className="text-red-400 text-xs font-sans" />
-                  </div>
-
-                  {/* Message field */}
-                  <div className="space-y-2">
-                    <label className="text-xs font-sans text-zinc-400 uppercase tracking-wider block font-medium">
-                      Your Message *
-                    </label>
-                    <textarea 
-                      name="message"
-                      required
-                      rows={5}
-                      placeholder="How can I help you?"
-                      className="w-full px-4 py-4.5 bg-black/50 border border-white/10 text-white placeholder-zinc-660 rounded-none focus:outline-none focus:border-white/40 focus:ring-0 text-sm transition duration-300 font-sans resize-none leading-relaxed"
-                    />
-                    <ValidationError prefix="Message" field="message" errors={state.errors} className="text-red-400 text-xs font-sans" />
-                  </div>
-
-                  {/* Submit Button */}
-                  <button
-                    type="submit"
-                    disabled={state.submitting}
-                    className="w-full py-4.5 bg-white text-black hover:bg-white/90 disabled:bg-zinc-800 disabled:text-zinc-500 font-sans font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2.5 transition duration-300 cursor-pointer rounded-none shadow-xl"
-                  >
-                    {state.submitting ? (
-                      <>
-                        <span className="w-4 h-4 border-2 border-zinc-400 border-t-black rounded-full animate-spin" />
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        Send Message <Send className="w-3.5 h-3.5" />
-                      </>
-                    )}
-                  </button>
-                </motion.form>
-              )}
-            </AnimatePresence>
-
-            <div className="flex items-center justify-between border-t border-white/5 pt-4 text-[10px] font-sans text-zinc-500">
-              <span>Adrian Hero Adona</span>
-              <span>Portfolio 2026</span>
-            </div>
+          <div className="space-y-2">
+            <label htmlFor="message" className="block text-sm text-muted">
+              Message
+            </label>
+            <textarea id="message" name="message" required rows={5} className={`${fieldClass} resize-none`} />
+            <ValidationError prefix="Message" field="message" errors={state.errors} className="text-sm text-red-400" />
           </div>
-
-        </div>
-      </div>
+          <button
+            type="submit"
+            disabled={state.submitting}
+            className="rounded border border-fg px-5 py-2 text-sm transition-colors hover:bg-fg hover:text-bg disabled:cursor-not-allowed disabled:border-line disabled:text-muted disabled:hover:bg-transparent"
+          >
+            {state.submitting ? "Sending" : "Send message"}
+          </button>
+        </form>
+      )}
     </section>
   );
 }
