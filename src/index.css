@@ -24,6 +24,17 @@
   --accent: #7dffa1;
   --accent-dim: #3d9a5f;
   --accent-bg: #12281a;
+
+  /* Brightness ramp for ASCII output, dim to bright. Matches the characters . : - = + * # % @ */
+  --g1: #1b4a2b;
+  --g2: #236337;
+  --g3: #2c7d44;
+  --g4: #3d9a5f;
+  --g5: #52bd78;
+  --g6: #7dffa1;
+  --g7: #a3ffbd;
+  --g8: #cfffdd;
+  --g9: #f0fff5;
   --warn: #e6c35c;
 
   --font: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -38,8 +49,6 @@
   --ease-snap: steps(8, end);
 
   --row: 1.65em;
-  --art-max: 1.3rem;
-  --img-rows: 10;
 }
 
 *,
@@ -68,16 +77,8 @@ body {
   line-height: 1.65;
 }
 
-@media (max-width: 519.98px) {
-  /* Frame height close to the screenshots' own shape, so cover does not trim the sides. */
-  body {
-    --img-rows: 7;
-  }
-}
-
 @media (min-width: 768px) {
   body {
-    --img-rows: 13;
     font-size: var(--fs-md);
   }
 }
@@ -305,14 +306,27 @@ button {
 
 /* ---------- dividers ---------- */
 
+/* SVG. Lines and patterns take the current colour. */
 .divider {
+  display: block;
+  height: 26px;
   overflow: hidden;
-  white-space: pre;
-  line-height: var(--row);
-  height: var(--row);
   color: var(--line);
   clip-path: inset(0 0 0 0);
   transition: clip-path 700ms var(--ease-out);
+}
+.divider line {
+  stroke: currentColor;
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+.divider pattern rect,
+.divider.d-bar rect {
+  fill: currentColor;
+}
+.divider.d-bar {
+  width: 252px;
+  max-width: 100%;
 }
 html[data-motion="on"] .divider:not(.in) {
   clip-path: inset(0 100% 0 0);
@@ -446,35 +460,35 @@ html[data-motion="on"][data-boot="pending"] .hero-links {
   container-type: inline-size;
   will-change: transform;
 }
+/* The wordmark is SVG and scales with the column. The stacked version is for narrow columns. */
 .wm {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 0 7px rgba(125, 255, 161, 0.26));
+}
+.wm-wide {
   display: none;
-  overflow: hidden;
-  white-space: pre;
-  color: var(--text);
-  line-height: 1;
-  letter-spacing: 0;
-  font-variant-ligatures: none;
-  font-size: min(var(--art-max), calc(100cqw / (var(--cols) * 0.6)));
-  /* Whole pixel character width, so neighbouring block characters meet with no seam. */
-  font-size: calc(round(down, min(var(--art-max) * 0.6, 100cqw / var(--cols)), 1px) / 0.6);
 }
-.wm.scrambling {
-  color: var(--accent);
-}
-@container (min-width: 640px) {
+@container (min-width: 480px) {
   .wm-wide {
     display: block;
   }
-}
-@container (min-width: 400px) and (max-width: 639.98px) {
-  .wm-medium {
-    display: block;
+  .wm-stack {
+    display: none;
   }
 }
-@container (max-width: 399.98px) {
-  .wm-compact {
-    display: block;
-  }
+.wm-shadow {
+  fill: none;
+  stroke: var(--accent-dim);
+  stroke-width: 0.9;
+  stroke-linejoin: miter;
+}
+.wm-scr text {
+  fill: var(--accent);
+  font-family: var(--font);
+  font-size: 10px;
+  white-space: pre;
 }
 .tag {
   max-width: 68ch;
@@ -548,68 +562,97 @@ html[data-motion="on"][data-boot="pending"] .hero-links {
 
 .pf-wrap {
   margin-bottom: calc(var(--row) * 3);
+  padding-top: calc(var(--row) * 0.5);
 }
 @media (min-width: 768px) {
   .pf-wrap.w8 {
     width: 66.6667%;
   }
 }
-.pf-in {
-  display: grid;
-  grid-template-columns: 1ch minmax(0, 1fr) 1ch;
-  white-space: pre;
-  line-height: var(--row);
-  color: var(--line);
-  transition: color 120ms;
-}
-.pf:hover .pf-in,
-.pf:focus-within .pf-in {
-  color: var(--accent-dim);
-}
-.pf-top {
+.pf {
+  position: relative;
   display: flex;
-  min-width: 0;
-  overflow: hidden;
+  flex-direction: column;
 }
-.pf-top .title {
-  flex: none;
+
+/* The outline is an SVG rectangle that draws itself clockwise from the top left corner. */
+.pf-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% - 1px);
+  height: calc(100% - 1px);
+  overflow: visible;
+  pointer-events: none;
+}
+.pf-box rect {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+  stroke-dasharray: 6000;
+  stroke-dashoffset: 0;
+  transition: stroke 120ms linear, stroke-dashoffset 900ms var(--ease-out);
+}
+.pf-sep {
+  display: block;
+  width: 100%;
+  height: 1px;
+  transition: opacity 200ms linear 500ms;
+}
+.pf-sep line {
+  stroke: var(--line);
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+  transition: stroke 120ms linear;
+}
+.pf:hover .pf-box rect,
+.pf:focus-within .pf-box rect,
+.pf:hover .pf-sep line,
+.pf:focus-within .pf-sep line {
+  stroke: var(--accent-dim);
+}
+
+/* Title and year sit on the top edge and cut the line, like a legend on a fieldset. */
+.pf-head {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 2ch;
+  line-height: var(--row);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.pf-head > * {
+  padding-inline: 1ch;
+  background: var(--bg);
+  pointer-events: auto;
+}
+.pf-head .title {
   color: var(--text);
 }
-.pf-top .lnk::before {
-  left: -1ch;
+.pf-head .title:hover,
+.pf-head .title:focus-visible {
+  color: var(--accent);
 }
-.pf-top .year {
-  flex: none;
+.pf-head .lnk::before {
+  left: 0;
+}
+.pf-head .year {
   color: var(--text-dim);
 }
-.fill {
-  flex: 1;
-  min-width: 0;
-  overflow: hidden;
-  margin-inline: 1ch;
-}
-.pf-sepfill,
-.pf-botfill {
-  overflow: hidden;
-  min-width: 0;
-}
-.vb {
-  position: relative;
-}
-.vb > span {
-  position: absolute;
-  /* Line height 1 makes the bars one unbroken line. The small overshoot meets the corner stems. */
-  inset: -0.2em 0;
-  overflow: hidden;
-  line-height: 1;
-}
+
+/* The box keeps the screenshot's own shape, so nothing is cropped at any width. */
 .pf-img {
   position: relative;
-  height: calc(var(--row) * var(--img-rows));
+  margin: 1px 1px 0;
   overflow: hidden;
   background: var(--bg-raised);
-  white-space: normal;
-  color: var(--text);
 }
 .pf-img img {
   position: absolute;
@@ -621,35 +664,62 @@ html[data-motion="on"][data-boot="pending"] .hero-links {
   filter: saturate(0.55) brightness(0.92);
   user-select: none;
 }
+
+/* The ASCII picture. A fixed grid of characters in SVG, scaled to the box. */
 .ascii {
   position: absolute;
   inset: 0;
-  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  font-family: var(--font);
   font-size: 10px;
-  line-height: 12px;
-  letter-spacing: 0;
-  color: var(--accent-dim);
   white-space: pre;
+  font-variant-ligatures: none;
   pointer-events: none;
 }
-.ascii > span {
-  display: block;
-  visibility: hidden;
-  background: var(--bg);
+.ascii .bg {
+  fill: var(--bg);
 }
-.ascii > span.on {
+.ascii .row {
+  visibility: hidden;
+}
+.ascii .row.on {
   visibility: visible;
 }
-@media (max-width: 519.98px) {
-  .ascii {
-    font-size: 13.3333px;
-    line-height: 16px;
-  }
+.ascii text {
+  fill: var(--g4);
 }
+.ascii .l1 {
+  fill: var(--g1);
+}
+.ascii .l2 {
+  fill: var(--g2);
+}
+.ascii .l3 {
+  fill: var(--g3);
+}
+.ascii .l4 {
+  fill: var(--g4);
+}
+.ascii .l5 {
+  fill: var(--g5);
+}
+.ascii .l6 {
+  fill: var(--g6);
+}
+.ascii .l7 {
+  fill: var(--g7);
+}
+.ascii .l8 {
+  fill: var(--g8);
+}
+.ascii .l9 {
+  fill: var(--g9);
+}
+
 .pf-text {
   min-width: 0;
-  padding-inline: 1ch;
-  white-space: normal;
+  padding: calc(var(--row) * 0.5) 2ch;
   color: var(--text);
 }
 .pf-text .tags {
@@ -660,39 +730,14 @@ html[data-motion="on"][data-boot="pending"] .hero-links {
   margin-right: 1ch;
 }
 
-/* The resting clip is an explicit inset() so the border draw can animate (none cannot). */
-.e-t,
-.e-r,
-.e-b,
-.e-l {
-  clip-path: inset(-0.5em 0 -0.5em 0);
-  transition: clip-path 100ms linear;
-}
-.e-r {
-  transition-delay: 100ms;
-}
-.e-b {
-  transition-delay: 200ms;
-}
-.e-l {
-  transition-delay: 300ms;
-}
 .pf-img,
 .pf-text {
   transition: opacity 200ms linear 400ms;
 }
-html[data-motion="on"] .pf:not(.in) .e-t {
-  clip-path: inset(0 100% 0 0);
+html[data-motion="on"] .pf:not(.in) .pf-box rect {
+  stroke-dashoffset: 6000;
 }
-html[data-motion="on"] .pf:not(.in) .e-r {
-  clip-path: inset(0 0 100% 0);
-}
-html[data-motion="on"] .pf:not(.in) .e-b {
-  clip-path: inset(0 0 0 100%);
-}
-html[data-motion="on"] .pf:not(.in) .e-l {
-  clip-path: inset(100% 0 0 0);
-}
+html[data-motion="on"] .pf:not(.in) .pf-sep,
 html[data-motion="on"] .pf:not(.in) .pf-img,
 html[data-motion="on"] .pf:not(.in) .pf-text {
   opacity: 0;

@@ -1,4 +1,4 @@
-const RAMP = " .:-=+*#%@";
+export const RAMP = " .:-=+*#%@";
 const cache = new Map<string, string[]>();
 
 export interface AsciiSpec {

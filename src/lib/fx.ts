@@ -25,6 +25,16 @@ export function scrambled(text: string, locks: number[], elapsed: number): strin
   return out;
 }
 
+// One line of art for the SVG wordmark. Cells left of fromCol are already resolved, so they
+// stay empty here. The rest show a random glyph wherever the final art has a mark.
+export function scrambleLine(text: string, fromCol: number): string {
+  let out = "";
+  for (let i = 0; i < text.length; i++) {
+    out += text[i] === " " || i < fromCol ? " " : randomGlyph();
+  }
+  return out;
+}
+
 const LOOKALIKES: Record<string, string> = { o: "0", e: "3", i: "1", a: "4", s: "5", l: "1", t: "7" };
 
 // Swaps one letter for a lookalike. Used for the short hover glitch on project titles.

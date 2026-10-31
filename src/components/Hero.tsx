@@ -1,19 +1,19 @@
 import { useLayoutEffect, useRef } from "react";
 import { heroLinks, tagline } from "../content";
 import { addTask } from "../lib/engine";
-import { lockTimes, scrambled } from "../lib/fx";
 import { useMotion } from "../lib/motion";
 import { onScroll } from "../lib/scroll";
 import { safeSet, safeGet } from "../lib/storage";
 import { wordmarks } from "../lib/wordmark";
 import Ambient from "./Ambient";
+import Wordmark, { WordmarkHandle } from "./Wordmark";
 
 const BOOT = [
   "> init portfolio --user adrian",
   "> loading experience.......... ok",
   "> loading projects............ ok",
 ];
-const KEYS = ["wide", "medium", "compact"] as const;
+const KEYS = ["wide", "stack"] as const;
 
 // Timeline in ms. Whole sequence ends under 2.4s. Click or any key skips it.
 const BOOT_START = 200;
@@ -25,7 +25,6 @@ const ART_AT = 1200; // wordmark scramble starts
 const TAG_AFTER = 700; // tagline and links come in this long after the wordmark starts
 const TAG_MS = 450;
 
-const blank = (s: string) => s.replace(/[^\s]/g, " ");
 const clamp = (n: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, n));
 
 export default function Hero() {
@@ -35,7 +34,7 @@ export default function Hero() {
   const bootText = useRef<HTMLSpanElement>(null);
   const art = useRef<HTMLDivElement>(null);
   const tag = useRef<HTMLSpanElement>(null);
-  const pres = useRef<Record<string, HTMLPreElement | null>>({});
+  const marks = useRef<Record<string, WordmarkHandle | null>>({});
 
   // Parallax: the wordmark moves at 0.15 of scroll speed. Scrubbed, no easing.
   useLayoutEffect(() => {
@@ -65,13 +64,7 @@ export default function Hero() {
 
     const showFinal = () => {
       bootEl.style.display = "none";
-      for (const k of KEYS) {
-        const pre = pres.current[k];
-        if (pre) {
-          pre.textContent = wordmarks[k].text;
-          pre.classList.remove("scrambling");
-        }
-      }
+      for (const k of KEYS) marks.current[k]?.paint(Infinity);
       tagEl.textContent = tagline;
       root.dataset.boot = "done";
     };
@@ -88,12 +81,10 @@ export default function Hero() {
 
     // The wordmark variant that is on screen right now.
     const key = KEYS.find((k) => {
-      const pre = pres.current[k];
-      return pre && getComputedStyle(pre).display !== "none";
+      const el = marks.current[k]?.el;
+      return el && getComputedStyle(el).display !== "none";
     });
-    const pre = key ? pres.current[key] : null;
-    const finalArt = key ? wordmarks[key].text : "";
-    const locks = lockTimes(finalArt, 300, 600);
+    const mark = key ? marks.current[key] : null;
 
     // Tagline keeps its space while typing: shown part + hidden rest.
     const shown = document.createElement("span");
@@ -118,18 +109,7 @@ export default function Hero() {
         bootEl.style.transform = `translateY(${-p * 100}%)`;
       }
 
-      if (pre) {
-        const te = t - artAt;
-        if (te < 0) {
-          pre.textContent = blank(finalArt);
-        } else if (te >= 600) {
-          pre.textContent = finalArt;
-          pre.classList.remove("scrambling");
-        } else {
-          pre.textContent = scrambled(finalArt, locks, te);
-          pre.classList.add("scrambling");
-        }
-      }
+      mark?.paint(t - artAt);
 
       const n = t < tagAt ? 0 : Math.floor(clamp((t - tagAt) / TAG_MS, 0, 1) * tagline.length);
       if (n !== lastTag) {
@@ -186,16 +166,14 @@ export default function Hero() {
       <h1 className="sr-only">Adrian Hero Adona</h1>
       <div className="art" ref={art} aria-hidden="true">
         {KEYS.map((k) => (
-          <pre
+          <Wordmark
             key={k}
-            ref={(el) => {
-              pres.current[k] = el;
+            name={k}
+            data={wordmarks[k]}
+            ref={(h) => {
+              marks.current[k] = h;
             }}
-            className={`wm wm-${k}`}
-            style={{ "--cols": wordmarks[k].cols } as React.CSSProperties}
-          >
-            {wordmarks[k].text}
-          </pre>
+          />
         ))}
       </div>
 
