@@ -1,63 +1,119 @@
+import { useEffect, useRef, useState } from "react";
 import { useForm, ValidationError } from "@formspree/react";
+import { contact } from "../content";
+import { useInView } from "../hooks/useInView";
+import Divider from "./Divider";
+import SectionTitle from "./SectionTitle";
 
-const linkClass =
-  "underline decoration-line underline-offset-4 transition-colors hover:decoration-fg";
+const UNDERLINE = "· ".repeat(70);
 
-const fieldClass =
-  "w-full rounded border border-line bg-transparent px-3 py-2 text-sm text-fg outline-none transition-colors focus:border-muted";
-
+// Prompt style form. Real labels and real inputs, styled only.
 export default function Contact() {
-  const [state, handleSubmit] = useForm("mpqebzzd");
+  const [state, handleSubmit] = useForm(contact.formId);
+  const prompt = useRef<HTMLDivElement>(null);
+  const seen = useInView(prompt, { threshold: 0.5 });
+  const [settled, setSettled] = useState(false);
+  const [tick, setTick] = useState(0);
+
+  // The cursor starts blinking a moment after the section has settled.
+  useEffect(() => {
+    if (!seen) return;
+    const id = window.setTimeout(() => setSettled(true), 500);
+    return () => window.clearTimeout(id);
+  }, [seen]);
+
+  useEffect(() => {
+    if (!state.submitting) return;
+    const id = window.setInterval(() => setTick((t) => t + 1), 120);
+    return () => window.clearInterval(id);
+  }, [state.submitting]);
+
+  const filled = tick % 9;
+  const formErrors = state.errors?.getFormErrors?.() ?? [];
 
   return (
-    <section id="contact" className="mx-auto max-w-3xl border-t border-line px-6 py-16">
-      <h2 className="mb-6 text-2xl font-semibold tracking-tight">Contact</h2>
-      <p className="max-w-xl text-body">
-        The quickest way to reach me is{" "}
-        <a href="mailto:adrianheroadona@gmail.com" className={linkClass}>
-          adrianheroadona@gmail.com
-        </a>
-        . You can also find me on{" "}
-        <a href="https://linkedin.com/in/ahadona" target="_blank" rel="noreferrer" className={linkClass}>
+    <section id="contact" className="sec">
+      <Divider variant="dots" />
+      <SectionTitle text="contact" />
+
+      <p className="contact-copy">
+        The quickest way to reach me is <span className="sel">{contact.email}</span>. You can also find me on{" "}
+        <a className="lnk" href={contact.linkedin} target="_blank" rel="noreferrer">
           LinkedIn
+          <span className="ext" aria-hidden="true">
+            ↗
+          </span>
         </a>{" "}
         or use the form below.
       </p>
 
-      {state.succeeded ? (
-        <p className="mt-10 text-body">Thanks, your message has been sent.</p>
-      ) : (
-        <form onSubmit={handleSubmit} className="mt-10 max-w-xl space-y-5">
-          <div className="space-y-2">
-            <label htmlFor="name" className="block text-sm text-muted">
-              Name
-            </label>
-            <input id="name" type="text" name="name" required className={fieldClass} />
-            <ValidationError prefix="Name" field="name" errors={state.errors} className="text-sm text-red-400" />
-          </div>
-          <div className="space-y-2">
-            <label htmlFor="email" className="block text-sm text-muted">
-              Email
-            </label>
-            <input id="email" type="email" name="email" required className={fieldClass} />
-            <ValidationError prefix="Email" field="email" errors={state.errors} className="text-sm text-red-400" />
-          </div>
-          <div className="space-y-2">
-            <label htmlFor="message" className="block text-sm text-muted">
-              Message
-            </label>
-            <textarea id="message" name="message" required rows={5} className={`${fieldClass} resize-none`} />
-            <ValidationError prefix="Message" field="message" errors={state.errors} className="text-sm text-red-400" />
-          </div>
-          <button
-            type="submit"
-            disabled={state.submitting}
-            className="rounded border border-fg px-5 py-2 text-sm transition-colors hover:bg-fg hover:text-bg disabled:cursor-not-allowed disabled:border-line disabled:text-muted disabled:hover:bg-transparent"
-          >
-            {state.submitting ? "Sending" : "Send message"}
-          </button>
-        </form>
-      )}
+      <div ref={prompt} className={`prompt${settled ? " settled" : ""}`}>
+        {state.succeeded ? (
+          <p className="ok" role="status">
+            &gt; message sent. i will reply soon.
+          </p>
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <div className="field">
+              <label htmlFor="name">name</label>
+              <span className="gt" aria-hidden="true">
+                &gt;
+              </span>
+              <input id="name" name="name" type="text" autoComplete="name" placeholder=" " required />
+              <span className="cur cursor" aria-hidden="true">
+                ▌
+              </span>
+            </div>
+            <div className="ul" aria-hidden="true">
+              {UNDERLINE}
+            </div>
+            <ValidationError prefix="Name" field="name" errors={state.errors} className="err" />
+
+            <div className="field">
+              <label htmlFor="email">email</label>
+              <span className="gt" aria-hidden="true">
+                &gt;
+              </span>
+              <input id="email" name="email" type="email" autoComplete="email" placeholder=" " required />
+            </div>
+            <div className="ul" aria-hidden="true">
+              {UNDERLINE}
+            </div>
+            <ValidationError prefix="Email" field="email" errors={state.errors} className="err" />
+
+            <div className="field">
+              <label htmlFor="message">message</label>
+              <span className="gt" aria-hidden="true">
+                &gt;
+              </span>
+              <textarea id="message" name="message" rows={4} placeholder=" " required />
+            </div>
+            <div className="ul" aria-hidden="true">
+              {UNDERLINE}
+            </div>
+            <ValidationError prefix="Message" field="message" errors={state.errors} className="err" />
+
+            {formErrors.length > 0 && (
+              <p className="err" role="alert">
+                &gt; could not send. check the fields above and try again.
+              </p>
+            )}
+
+            <div className="send">
+              {state.submitting ? (
+                <span className="loader" role="status">
+                  sending [{"■".repeat(filled)}
+                  {"□".repeat(8 - filled)}]
+                </span>
+              ) : (
+                <button type="submit" className="btn">
+                  send message
+                </button>
+              )}
+            </div>
+          </form>
+        )}
+      </div>
     </section>
   );
 }

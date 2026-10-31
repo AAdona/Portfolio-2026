@@ -1,21 +1,57 @@
-const groups = [
-  { label: "Languages", items: "PHP, JavaScript, TypeScript, HTML, CSS, SCSS" },
-  { label: "Platforms and libraries", items: "WordPress, ACF Pro, React, Tailwind CSS, GSAP" },
-  { label: "Tools", items: "Git, Vercel, Figma, Adobe XD" },
-];
+import { CSSProperties, useRef } from "react";
+import { skillTree } from "../content";
+import { useInView } from "../hooks/useInView";
+import Divider from "./Divider";
+import SectionTitle from "./SectionTitle";
 
+const row = (i: number) => ({ "--i": i }) as CSSProperties;
+
+// A directory tree. Real nested lists, with the branch characters hidden from screen readers.
+// Rows appear one at a time, 60ms apart.
 export default function Skills() {
+  const ref = useRef<HTMLUListElement>(null);
+  const seen = useInView(ref, { threshold: 0.3 });
+  let n = 0;
+
   return (
-    <section id="skills" className="mx-auto max-w-3xl border-t border-line px-6 py-16">
-      <h2 className="mb-10 text-2xl font-semibold tracking-tight">Skills</h2>
-      <dl className="space-y-4">
-        {groups.map((group) => (
-          <div key={group.label} className="grid gap-1 md:grid-cols-[11rem_1fr] md:gap-8">
-            <dt className="text-sm text-muted">{group.label}</dt>
-            <dd className="text-body">{group.items}</dd>
-          </div>
-        ))}
-      </dl>
+    <section id="skills" className="sec">
+      <Divider variant="bar" />
+      <SectionTitle text="skills" />
+      <ul ref={ref} className={`tree${seen ? " in" : ""}`}>
+        <li>
+          <p className="row" style={row(n++)}>
+            <span className="dir">{skillTree.root}</span>
+          </p>
+          <ul>
+            {skillTree.groups.map((group, gi) => {
+              const lastGroup = gi === skillTree.groups.length - 1;
+              return (
+                <li key={group.name}>
+                  <p className="row" style={row(n++)}>
+                    <span className="pre" aria-hidden="true">
+                      {lastGroup ? "└── " : "├── "}
+                    </span>
+                    <span className="dir">{group.name}</span>
+                  </p>
+                  <ul>
+                    {group.items.map((item, ii) => {
+                      const lastItem = ii === group.items.length - 1;
+                      return (
+                        <li key={item} className="row" style={row(n++)}>
+                          <span className="pre" aria-hidden="true">
+                            {(lastGroup ? "    " : "│   ") + (lastItem ? "└── " : "├── ")}
+                          </span>
+                          <span>{item}</span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </li>
+              );
+            })}
+          </ul>
+        </li>
+      </ul>
     </section>
   );
 }

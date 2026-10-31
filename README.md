@@ -2,7 +2,7 @@
 
 Source code for my portfolio site: https://www.adrianadona.lol
 
-Built with React, TypeScript, Tailwind CSS and Vite.
+Built with React, TypeScript and Vite. The styling is hand-written CSS, and the ASCII wordmark is generated at build time with figlet (`scripts/gen-wordmark.mjs`).
 
 ## Run locally
 
